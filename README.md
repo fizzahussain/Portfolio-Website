@@ -42,3 +42,16 @@ Two real walkthroughs are bundled into the portfolio and open in the retro media
 - `media/demos/personal-finance-demo.mp4` — Personal Finance / FinanceFlow (~3:20)
 
 Poster frames are stored alongside them and the demos are accessible from the RAG boss panel and project Quest Map.
+
+
+## V9 refinement
+
+- player camera now uses one curated portrait
+- a second portrait appears only at the ending, not as a camera roll
+- GitHub is available from the first screen
+- expected graduation 2028 is shown in the player panel
+- Personal Finance now exposes its demo button
+- Data Analytics internship corrected to 2024
+- expanded art archive with deer mini canvas, wall-detail paintings, cow clay figure, and existing painting/craft work
+- visible em dashes removed from copy where possible
+- section palette diversified while preserving the retro game / old-OS visual language

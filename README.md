@@ -1,6 +1,19 @@
-# FIZZA//SAVE FILE 2026
+# FIZZA//SAVE FILE — v7
 
-A dependency-free interactive portfolio for Fizza Hussain, built as a hybrid of a retro operating system, game UI, technical lab, and personal creative archive.
+A handcrafted static portfolio for Fizza Hussain, designed as a hybrid of an old operating system, a game save screen, an AI lab, and a personal creative archive.
+
+## What changed in v7
+
+- Replaced the generic art-wall player image with real portrait photography
+- Added a 4-photo interactive player camera
+- Added a personal camera roll to the About section
+- Rewrote the hero copy to feel more personal and less portfolio-template-like
+- Made floral watercolor, calligraphy/branches, and birds/blossoms explicitly featured instead of buried in thumbnails
+- Added art filters for paintings, mini canvases, studio archive, and clay/baking
+- Improved thumbnail cropping and artwork presentation
+- Preserved the corrected pottery/baking distinction
+- Kept all Semester 5 coursework, both new Data Science projects, and the existing AI/software/systems work
+- Refined the game/OS visual language with more deliberate windows, HUD details, scan UI, photo controls, and physical-card styling
 
 ## Run locally
 
@@ -8,24 +21,24 @@ A dependency-free interactive portfolio for Fizza Hussain, built as a hybrid of 
 python -m http.server 8000
 ```
 
-Open `http://localhost:8000`.
+Then open:
+
+```text
+http://localhost:8000
+```
 
 ## Deploy to Vercel
 
-Import the repository into Vercel as a static project. No build command or environment variables are required.
+This site is plain HTML/CSS/JavaScript with no dependencies.
 
-## Interaction shortcuts
+Import the folder/repository into Vercel and deploy it as a static site.
 
-- `1`–`8` jump between stages
-- `M` opens the world map
-- `A` opens About / Art
-- `P` opens Projects
-- SFX starts disabled
 
-## Media
+## Demo videos
 
-The `media/crops/` directory contains web-ready crops generated from the original personal artwork and life photos. Original media remains under `media/art/` and `media/life/`.
+Two real walkthroughs are bundled into the portfolio and open in the retro media player:
 
-## Academic profile
+- `media/demos/rag-document-assistant-demo.mp4` — RAG Document Assistant (~5:50)
+- `media/demos/personal-finance-demo.mp4` — Personal Finance / FinanceFlow (~3:20)
 
-Public academic details intentionally exclude GPA / SGPA.
+Poster frames are stored alongside them and the demos are accessible from the RAG boss panel and project Quest Map.

@@ -17,19 +17,19 @@
     <div class="boot-grid"></div>
     <div class="boot-stars" aria-hidden="true">✦ · ✧ · ✦ · ✧ · ✦</div>
     <div class="boot-title-wrap">
-      <p class="boot-kicker">FIZZA PRESENTS</p>
-      <h1>PORTFOLIO<br><span>2026</span></h1>
-      <p class="boot-sub">AI / DATA / SOFTWARE / ART / SIDE QUESTS</p>
+      <p class="boot-kicker">PLAYER SELECT // SLOT 01</p>
+      <h1>FIZZA<br><span>2026</span></h1>
+      <p class="boot-sub">MAIN QUEST: AI + DATA SCIENCE // SIDE QUESTS: EVERYTHING ELSE</p>
       <div class="boot-menu">
         <button id="startGame" class="game-button primary">▶ NEW GAME</button>
         <button id="quickStart" class="game-button">⚡ QUICK TOUR</button>
         <a class="game-button" href="https://github.com/fizzahussain" target="_blank" rel="noreferrer">💾 GITHUB</a>
       </div>
-      <p class="boot-help">WASD not required · curiosity recommended</p>
+      <p class="boot-help">PRESS START · no tutorial required · secrets hidden in the interface</p>
     </div>
-    <div class="boot-scene art-card"><img src="media/crops/studio-wall-wide.webp" alt="Fizza's art wall"></div>
+    <div class="boot-scene art-card"><img src="media/portraits/night-seated-square.webp" alt="Fizza Hussain"><span class="boot-photo-tag">PLAYER_01.JPG</span></div>
     <div class="boot-scene data-card"><span>DATA STREAM</span><b>RAG</b><b>ML</b><b>SQL</b><b>C++</b></div>
-    <div class="boot-avatar-card"><div class="pixel-avatar">FH</div><span>PLAYER 01</span></div>
+    <div class="boot-avatar-card"><img src="media/crops/calligraphy-branches-sq.webp" alt="Calligraphy and branches painting"><span>INVENTORY: CODE + PAINT</span></div>
   </div>
 
   <div id="app" class="app-shell locked">
@@ -66,14 +66,14 @@
         <div class="hero-gameframe">
           <div class="hero-copy">
             <div class="stage-chip">PLAYER 01 // FIZZA HUSSAIN</div>
-            <h2>I TURN<br><span>MESSY THINGS</span><br>INTO SYSTEMS.</h2>
-            <p class="hero-lede">Documents into answers. Data into decisions. Ideas into interfaces. Blank canvases into something worth keeping.</p>
+            <h2>TEACHING<br><span>MACHINES.</span><br>MAKING THINGS<br>BY HAND.</h2>
+            <p class="hero-lede">I’m Fizza — a Data Science student building RAG systems, ML/data projects and software, then disappearing into paint, clay, sport or debate when the side quests call.</p>
             <div class="hero-note window cream-window">
               <div class="window-bar cobalt"><span>README_FIZZA.TXT</span><span>□ ×</span></div>
               <div class="window-pad">
-                <p><strong>Main quest:</strong> AI &amp; Data Science.</p>
-                <p>Everything else — backend, databases, algorithms, C++, visual design, leadership, painting, pottery, sport — is part of how I learned to build things with more range.</p>
-                <p class="scribble">I like the part where the idea becomes real.</p>
+                <p><strong>Main quest:</strong> make data useful and intelligent systems trustworthy.</p>
+                <p><strong>Loadout:</strong> RAG, ML, analytics, backend, databases, algorithms, systems, visual instinct and an unreasonable number of side quests.</p>
+                <p class="scribble">best part: when something goes from “what if?” to “it works.”</p>
               </div>
             </div>
             <div class="hero-buttons">
@@ -83,24 +83,25 @@
             </div>
           </div>
 
-          <div class="hero-console">
-            <div class="console-top"><span>PLAYER STATUS</span><span class="blink">● ONLINE</span></div>
+          <div class="hero-console player-console">
+            <div class="console-top"><span>PLAYER_CAM.EXE</span><span class="blink">● LIVE</span></div>
             <div class="console-body">
-              <div class="avatar-panel">
-                <img src="media/crops/studio-wall-wide.webp" alt="Fizza's art wall and workspace">
+              <div class="avatar-panel player-photo-panel">
+                <img id="playerPhoto" src="media/portraits/sunlit-stairs-wide.webp" alt="Fizza Hussain">
                 <div class="target-box"></div>
-                <span class="scan-label">SUBJECT_FH</span>
+                <span class="scan-label">FIZZA_H // HUMAN</span>
+                <div class="photo-hud"><button id="prevPhoto">◀</button><span id="photoCounter">01 / 04</span><button id="nextPhoto">▶</button></div>
               </div>
-              <div class="console-data">
-                <p><span>CLASS</span><b>DATA SCIENCE STUDENT</b></p>
-                <p><span>BUILD TYPE</span><b>AI-FIRST / ENGINEERING-BACKED</b></p>
-                <p><span>ACTIVE QUESTS</span><b>RAG · ML · DATA ANALYSIS</b></p>
-                <p><span>SIDE QUESTS</span><b>ART · POTTERY · SPORT · DEBATE</b></p>
+              <div class="console-data player-data">
+                <p><span>CLASS</span><b>BS DATA SCIENCE</b></p>
+                <p><span>BASE</span><b>FAST-NUCES ISLAMABAD</b></p>
+                <p><span>MAIN QUEST</span><b>AI · ML · DATA</b></p>
+                <p><span>SECONDARY TREE</span><b>SOFTWARE · SYSTEMS · DESIGN</b></p>
               </div>
-              <div class="status-bars">
-                <label>CURIOUS <i style="--w:96%"></i></label>
-                <label>BUILDING <i style="--w:91%"></i></label>
-                <label>LEARNING <i style="--w:100%"></i></label>
+              <div class="quest-queue">
+                <span>NOW PLAYING</span>
+                <b>RAG / ML / DATA VISUALIZATION</b>
+                <small>+ painting after hours · horse riding when possible · debate forever</small>
               </div>
             </div>
           </div>
@@ -143,7 +144,10 @@
             <ul>
               <li>multi-format document ingestion</li><li>selective OCR fallback</li><li>voice input with faster-whisper</li><li>context-aware chunking</li><li>pgvector + HNSW retrieval</li><li>grounded answers + citations</li><li>multi-user isolation</li><li>Dockerized services</li>
             </ul>
-            <a href="https://github.com/fizzahussain/Rag-Document-Assistant" class="pixel-cta lime" target="_blank" rel="noreferrer">VIEW BOSS FILE ↗</a>
+            <div class="boss-actions">
+              <button id="openRagDemo" class="pixel-cta yellow demo-launch">▶ WATCH DEMO</button>
+              <a href="https://github.com/fizzahussain/Rag-Document-Assistant" class="pixel-cta lime" target="_blank" rel="noreferrer">VIEW BOSS FILE ↗</a>
+            </div>
           </div>
         </div>
       </section>
@@ -220,14 +224,14 @@
       <section id="about" class="stage about-stage">
         <div class="stage-head">
           <span>STAGE 06 // PLAYER LORE</span>
-          <h2>I MAKE THINGS<br>WITH <em>LOGIC + INSTINCT.</em></h2>
-          <p>Painting, pottery, sport, debate, design, and engineering don’t feel like separate personalities to me. They’re different ways of observing, experimenting, practicing, and making something intentional.</p>
+          <h2>NOT A SIDE OF ME.<br><em>THE OTHER HALF OF THE SYSTEM.</em></h2>
+          <p>I don’t keep “technical Fizza” and “creative Fizza” in separate folders. Painting trains my eye, sport trains repetition, debate trains clarity, pottery teaches patience, and engineering gives all of that somewhere to land.</p>
         </div>
         <div class="about-grid">
           <div class="character-window window cream-window draggable">
             <div class="window-bar pink"><span>ABOUT_FIZZA.EXE</span><span>♡</span></div>
             <div class="character-body">
-              <div class="character-copy"><h3>I make things — with code, data, paint, clay, and a lot of curiosity.</h3><p>My main direction is AI &amp; Data Science, but the way I think has always been mixed: analytical enough to enjoy systems, visual enough to care how they feel, competitive enough to love sport, and curious enough to keep picking up new side quests.</p></div>
+              <div class="character-copy"><h3>I make things — with code, data, paint, clay, and a lot of curiosity.</h3><p>Some days that means debugging retrieval. Some days it means painting flowers at 2 AM. Sometimes it means arguing a point in debate, making a ridiculous retirement cake, or trying to get better at a sport. I like the repetition of getting better at things.</p></div>
               <div class="life-strip"><img src="media/crops/basketball-portrait.webp" alt="Basketball"><img src="media/crops/horse-riding-portrait.webp" alt="Horse riding"><img src="media/crops/clay-candle-holder-portrait.webp" alt="Handmade clay candle holder"></div>
               <div class="hobby-inventory"><span>🎨 Painting</span><span>🏺 Pottery</span><span>🏀 Basketball</span><span>🏸 Badminton</span><span>🐎 Horse riding</span><span>🏊 Swimming</span><span>🎙 Debating</span><span>🧁 Baking</span></div>
             </div>
@@ -238,10 +242,28 @@
           </div>
         </div>
 
+        <div class="camera-roll window white-window">
+          <div class="window-bar cobalt"><span>CAMERA_ROLL // HUMAN_SIDE</span><span>4 FILES</span></div>
+          <div class="camera-roll-grid">
+            <figure><img src="media/portraits/night-seated-portrait.webp" alt="Fizza at night"><figcaption>night_mode.jpg <small>soft launch of touching grass</small></figcaption></figure>
+            <figure><img src="media/portraits/traditional-portrait.webp" alt="Fizza in traditional clothing"><figcaption>traditional_fit.jpg <small>outside the terminal, occasionally</small></figcaption></figure>
+            <figure><img src="media/portraits/garden-portrait.webp" alt="Fizza in a garden"><figcaption>green_buffer.jpg <small>nature has excellent UI</small></figcaption></figure>
+            <figure><img src="media/portraits/sunlit-stairs-portrait.webp" alt="Fizza in sunlight"><figcaption>sunlight_patch.jpg <small>rendered with actual photons</small></figcaption></figure>
+          </div>
+        </div>
+
+        <div class="featured-art-strip">
+          <article class="featured-art-card leaf-card"><img src="media/crops/floral-watercolor-portrait.webp" alt="Floral watercolor painting"><span>FLOWERS / WATER / COLOR</span><b>floral_watercolor.paint</b></article>
+          <article class="featured-art-card calligraphy-card"><img src="media/crops/calligraphy-branches-portrait.webp" alt="Calligraphy and branches painting"><span>BRANCHES / CALLIGRAPHY</span><b>calligraphy_branches.paint</b></article>
+          <article class="featured-art-card blossom-card"><img src="media/crops/birds-blossoms-portrait.webp" alt="Birds and blossoms painting"><span>BIRDS / BLOSSOMS</span><b>birds_2022.paint</b></article>
+          <div class="featured-art-note"><span>ART_FOLDER / PINNED</span><p>These aren’t “portfolio filler.” They’re part of how I learned composition, patience, iteration and when to stop touching something.</p></div>
+        </div>
+
         <div class="art-browser window gray-window">
           <div class="window-bar blue"><span>IMAGE BROWSER — C:\FIZZA\MY_ART\</span><span>_ □ ×</span></div>
           <div class="art-toolbar"><button id="prevArt">◀ PREV</button><button id="shuffleArt">⤨ SHUFFLE</button><span id="artPath">C:\FIZZA\MY_ART\paintings\</span><button id="nextArt">NEXT ▶</button></div>
-          <div class="art-layout"><div id="artThumbs" class="art-thumbs"></div><div class="art-preview"><div class="art-canvas"><img id="artPreviewImg" alt="Selected artwork"></div><div class="art-caption"><span id="artCounter">01 / 13</span><h3 id="artPreviewTitle">Rabbit study</h3><p id="artPreviewMeta">Acrylic mini canvas</p><p id="artPreviewNote">Small format, close observation, and the kind of thing I make because I feel like making it.</p></div></div></div>
+          <div class="art-filters" id="artFilters"><button class="active" data-art-filter="all">ALL FILES</button><button data-art-filter="painting">PAINTINGS</button><button data-art-filter="mini">MINI CANVASES</button><button data-art-filter="studio">STUDIO</button><button data-art-filter="craft">CLAY + BAKE</button></div>
+          <div class="art-layout"><div id="artThumbs" class="art-thumbs"></div><div class="art-preview"><div class="art-canvas"><img id="artPreviewImg" alt="Selected artwork"></div><div class="art-caption"><span id="artCounter">01 / 14</span><h3 id="artPreviewTitle">Rabbit study</h3><p id="artPreviewMeta">Acrylic mini canvas</p><p id="artPreviewNote">Small format, close observation, and the kind of thing I make because I feel like making it.</p></div></div></div>
         </div>
       </section>
 
@@ -259,6 +281,28 @@
     </main>
 
     <div id="mapPanel" class="map-overlay hidden"><div class="map-window window cream-window"><div class="window-bar cobalt"><span>WORLD_MAP.EXE</span><button id="closeMap">×</button></div><div class="map-grid"><a href="#home">01<span>PLAYER</span></a><a href="#ai">02<span>AI LAB</span></a><a href="#data">03<span>DATA</span></a><a href="#projects">04<span>QUESTS</span></a><a href="#skills">05<span>SKILLS</span></a><a href="#about">06<span>ABOUT</span></a><a href="#log">07<span>LOG</span></a><a href="#contact">08<span>CONTACT</span></a></div><p>Keyboard: 1–8 jump sections · M opens map · A opens art · P opens projects</p></div></div>
+
+    <div id="demoOverlay" class="demo-overlay hidden" aria-hidden="true">
+      <div class="demo-player window gray-window" role="dialog" aria-modal="true" aria-labelledby="demoTitle">
+        <div class="window-bar blue demo-player-bar">
+          <span id="demoWindowTitle">MEDIA_PLAYER.EXE</span>
+          <button id="closeDemo" class="window-close" aria-label="Close demo player">×</button>
+        </div>
+        <div class="demo-player-toolbar">
+          <span>FILE</span><span>VIEW</span><span>PLAYBACK</span><span>HELP</span>
+          <b id="demoDuration">00:00</b>
+        </div>
+        <div class="demo-screen-wrap">
+          <video id="demoVideo" controls playsinline preload="metadata" poster=""></video>
+          <div class="demo-osd"><span id="demoBadge">DEMO</span><strong id="demoTitle">Project demo</strong></div>
+        </div>
+        <div class="demo-info">
+          <div><span>NOW PLAYING</span><strong id="demoNowPlaying">—</strong></div>
+          <div><span>FORMAT</span><strong>MP4 · 1920×1080</strong></div>
+          <div><span>TIP</span><strong>Use fullscreen for the full walkthrough</strong></div>
+        </div>
+      </div>
+    </div>
 
     <div id="achievement" class="achievement hidden"><span>ACHIEVEMENT UNLOCKED</span><b id="achievementText">Curiosity +1</b></div>
   </div>

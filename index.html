@@ -3,305 +3,264 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#111111" />
-  <meta name="description" content="Fizza Hussain — AI & Data Science, software engineering, systems, art and everything in between." />
-  <title>FIZZA//2026 — Portfolio</title>
+  <meta name="theme-color" content="#080808" />
+  <meta name="description" content="Fizza Hussain — AI & Data Science, software engineering, systems, art, and side quests." />
+  <title>FIZZA//SAVE FILE 2026</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&family=VT323&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div id="boot" class="boot-screen" aria-hidden="false">
-    <div class="boot-noise"></div>
-    <div class="boot-card pixel-window">
-      <div class="titlebar hot-pink"><span>FIZZA//2026</span><span>PLAYER SELECT</span></div>
-      <div class="boot-body">
-        <div class="boot-avatar">FH</div>
-        <div>
-          <p class="eyebrow">NEW GAME +</p>
-          <h1>Fizza Hussain</h1>
-          <p class="boot-copy">AI / DATA SCIENCE · SOFTWARE · SYSTEMS · ART</p>
-        </div>
-        <button id="startGame" class="pixel-btn green">PRESS START</button>
-        <button id="skipBoot" class="text-btn">skip intro</button>
+  <div id="boot" class="boot-screen">
+    <div class="boot-grid"></div>
+    <div class="boot-stars" aria-hidden="true">✦ · ✧ · ✦ · ✧ · ✦</div>
+    <div class="boot-title-wrap">
+      <p class="boot-kicker">FIZZA PRESENTS</p>
+      <h1>PORTFOLIO<br><span>2026</span></h1>
+      <p class="boot-sub">AI / DATA / SOFTWARE / ART / SIDE QUESTS</p>
+      <div class="boot-menu">
+        <button id="startGame" class="game-button primary">▶ NEW GAME</button>
+        <button id="quickStart" class="game-button">⚡ QUICK TOUR</button>
+        <a class="game-button" href="https://github.com/fizzahussain" target="_blank" rel="noreferrer">💾 GITHUB</a>
       </div>
+      <p class="boot-help">WASD not required · curiosity recommended</p>
     </div>
+    <div class="boot-scene art-card"><img src="media/crops/studio-wall-wide.webp" alt="Fizza's art wall"></div>
+    <div class="boot-scene data-card"><span>DATA STREAM</span><b>RAG</b><b>ML</b><b>SQL</b><b>C++</b></div>
+    <div class="boot-avatar-card"><div class="pixel-avatar">FH</div><span>PLAYER 01</span></div>
   </div>
 
-  <div id="app" class="app-shell is-locked">
-    <header class="topbar">
-      <div class="menu-left">
-        <button class="menu-logo" data-open="startMenu">FH</button>
-        <span class="menu-title">FIZZA_OS</span>
-        <nav>
-          <a href="#home">Home</a>
-          <a href="#ai">AI Lab</a>
-          <a href="#projects">Projects</a>
-          <a href="#about">About</a>
-          <a href="#experience">Timeline</a>
-        </nav>
-      </div>
-      <div class="menu-right">
-        <button id="soundToggle" class="chrome-btn">SFX: OFF</button>
-        <button id="modeToggle" class="chrome-btn">MODE: PLAY</button>
-        <span id="clock">00:00</span>
+  <div id="app" class="app-shell locked">
+    <header class="hudbar">
+      <button class="hud-logo" id="openMap">FH</button>
+      <div class="hud-name"><strong>FIZZA//2026</strong><small>MAIN QUEST: AI + DATA SCIENCE</small></div>
+      <nav class="hud-nav" aria-label="Main navigation">
+        <a href="#home"><b>01</b> PLAYER</a>
+        <a href="#ai"><b>02</b> AI LAB</a>
+        <a href="#data"><b>03</b> DATA</a>
+        <a href="#projects"><b>04</b> QUESTS</a>
+        <a href="#skills"><b>05</b> SKILLS</a>
+        <a href="#about"><b>06</b> ME</a>
+        <a href="#log"><b>07</b> LOG</a>
+      </nav>
+      <div class="hud-actions">
+        <button id="soundToggle" class="hud-chip">SFX OFF</button>
+        <span id="clock" class="hud-clock">00:00</span>
       </div>
     </header>
 
-    <aside class="level-rail" aria-label="section navigation">
-      <a href="#home" data-label="PLAYER">01</a>
-      <a href="#ai" data-label="AI LAB">02</a>
-      <a href="#projects" data-label="QUESTS">03</a>
-      <a href="#about" data-label="ABOUT">04</a>
-      <a href="#experience" data-label="LOG">05</a>
-      <a href="#contact" data-label="EXIT">06</a>
+    <div class="xpbar"><span id="xpFill"></span><b id="xpText">XP 000 / 700</b></div>
+
+    <aside class="quick-rail" aria-label="Quick navigation">
+      <button id="railMap" title="Open map">MAP</button>
+      <a href="#ai" title="AI Lab">AI</a>
+      <a href="#projects" title="Projects">QST</a>
+      <a href="#about" title="About">ME</a>
+      <a href="#contact" title="Contact">END</a>
     </aside>
 
     <main>
-      <section id="home" class="scene hero-scene">
-        <div class="hero-grid">
-          <div class="hero-main">
-            <div class="game-kicker">PLAYER 01 // FIZZA HUSSAIN</div>
-            <h1 class="hero-title">I BUILD.<br><span>I EXPERIMENT.</span><br>I MAKE THINGS.</h1>
-            <p class="hero-thesis">With code, data, paint, clay, motion, and a lot of curiosity.</p>
-            <div class="hero-copy-box pixel-window cream">
-              <div class="titlebar blue"><span>player_profile.txt</span><span>×</span></div>
-              <div class="window-body">
-                <p>I’m a BS Data Science student building toward AI / ML, with the kind of curiosity that keeps pulling me into backend systems, databases, algorithms, C++, interfaces, research, visual design, and occasionally a 2&nbsp;AM painting session.</p>
-                <p><strong>The thread is simple:</strong> I like understanding how things work, then making them work better.</p>
+      <section id="home" class="stage hero-stage">
+        <div class="hero-gameframe">
+          <div class="hero-copy">
+            <div class="stage-chip">PLAYER 01 // FIZZA HUSSAIN</div>
+            <h2>I TURN<br><span>MESSY THINGS</span><br>INTO SYSTEMS.</h2>
+            <p class="hero-lede">Documents into answers. Data into decisions. Ideas into interfaces. Blank canvases into something worth keeping.</p>
+            <div class="hero-note window cream-window">
+              <div class="window-bar cobalt"><span>README_FIZZA.TXT</span><span>□ ×</span></div>
+              <div class="window-pad">
+                <p><strong>Main quest:</strong> AI &amp; Data Science.</p>
+                <p>Everything else — backend, databases, algorithms, C++, visual design, leadership, painting, pottery, sport — is part of how I learned to build things with more range.</p>
+                <p class="scribble">I like the part where the idea becomes real.</p>
               </div>
             </div>
-            <div class="hero-actions">
-              <a class="pixel-btn yellow" href="#projects">START QUEST</a>
-              <a class="pixel-btn white" href="#about">MEET THE PLAYER</a>
+            <div class="hero-buttons">
+              <a href="#ai" class="pixel-cta lime">ENTER AI LAB</a>
+              <a href="#projects" class="pixel-cta pink">SELECT A QUEST</a>
+              <a href="#about" class="pixel-cta yellow">OPEN MY WORLD</a>
             </div>
           </div>
 
-          <div class="hero-hud pixel-window black">
-            <div class="titlebar lime"><span>CHARACTER SHEET</span><span>LV.03</span></div>
-            <div class="hud-body">
-              <div class="player-card">
-                <div class="portrait-frame">
-                  <img src="media/art/studio-wall.jpeg" alt="Fizza's studio wall with paintings" />
-                  <div class="scanline"></div>
-                </div>
-                <div class="player-meta">
-                  <span>CLASS</span><strong>AI / DATA BUILDER</strong>
-                  <span>SIDE CLASS</span><strong>SOFTWARE ENGINEER</strong>
-                  <span>PASSIVE</span><strong>MAKES THINGS BY HAND</strong>
-                </div>
+          <div class="hero-console">
+            <div class="console-top"><span>PLAYER STATUS</span><span class="blink">● ONLINE</span></div>
+            <div class="console-body">
+              <div class="avatar-panel">
+                <img src="media/crops/studio-wall-wide.webp" alt="Fizza's art wall and workspace">
+                <div class="target-box"></div>
+                <span class="scan-label">SUBJECT_FH</span>
               </div>
-              <div class="stat-grid">
-                <div><span>MAIN QUEST</span><strong>AI + DATA SCIENCE</strong></div>
-                <div><span>SKILL TREE</span><strong>RAG → ML → SYSTEMS</strong></div>
-                <div><span>SPAWN</span><strong>FAST-NUCES</strong></div>
-                <div><span>STATUS</span><strong class="lime-text">BUILDING</strong></div>
+              <div class="console-data">
+                <p><span>CLASS</span><b>DATA SCIENCE STUDENT</b></p>
+                <p><span>BUILD TYPE</span><b>AI-FIRST / ENGINEERING-BACKED</b></p>
+                <p><span>ACTIVE QUESTS</span><b>RAG · ML · DATA ANALYSIS</b></p>
+                <p><span>SIDE QUESTS</span><b>ART · POTTERY · SPORT · DEBATE</b></p>
               </div>
-              <div class="inventory-row">
-                <button data-jump="#ai">🧠 AI LAB</button>
-                <button data-jump="#projects">💾 PROJECTS</button>
-                <button data-jump="#about">🎨 ART</button>
-                <button data-jump="#experience">📜 LOG</button>
+              <div class="status-bars">
+                <label>CURIOUS <i style="--w:96%"></i></label>
+                <label>BUILDING <i style="--w:91%"></i></label>
+                <label>LEARNING <i style="--w:100%"></i></label>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="ticker" aria-hidden="true"><div>RAG ✦ DATA SCIENCE ✦ MACHINE LEARNING ✦ PYTHON ✦ FASTAPI ✦ PGVECTOR ✦ C++ ✦ SQL ✦ ART ✦ POTTERY ✦ BASKETBALL ✦ HORSE RIDING ✦ DEBATE ✦ BUILD AGAIN ✦</div></div>
+        <div class="marquee"><div>RAG ✦ MACHINE LEARNING ✦ DATA ANALYSIS ✦ FASTAPI ✦ POSTGRESQL ✦ C++ ✦ ALGORITHMS ✦ PAINT ✦ CLAY ✦ BASKETBALL ✦ HORSES ✦ BUILD AGAIN ✦</div></div>
       </section>
 
-      <section id="ai" class="scene crt-scene">
-        <div class="scene-head light-on-dark">
-          <span class="level-tag">LEVEL 02 / AI LAB</span>
-          <h2>THE MODEL IS ONLY<br>ONE ROOM IN THE HOUSE.</h2>
-          <p>I’m most interested in the systems around intelligence: data quality, retrieval, evaluation, context, interfaces, storage, and what the user actually experiences.</p>
+      <section id="ai" class="stage ai-stage">
+        <div class="stage-head inverted">
+          <span>STAGE 02 // AI LAB</span>
+          <h2>THE MODEL ISN’T<br>THE MAGIC TRICK.<br><em>THE PIPELINE IS.</em></h2>
+          <p>I’m interested in what happens before and after generation: ingestion, retrieval, evaluation, storage, grounding, latency, interfaces, and whether the answer can actually be trusted.</p>
         </div>
-
-        <div class="ai-console pixel-window black">
-          <div class="titlebar terminal-green"><span>FIZZA_AI_LAB.EXE</span><span id="aiStatus">ONLINE</span></div>
-          <div class="console-grid">
-            <div class="console-sidebar">
-              <button class="ai-node active" data-ai="ingest">01 INGEST</button>
-              <button class="ai-node" data-ai="understand">02 UNDERSTAND</button>
-              <button class="ai-node" data-ai="represent">03 REPRESENT</button>
-              <button class="ai-node" data-ai="retrieve">04 RETRIEVE</button>
-              <button class="ai-node" data-ai="ground">05 GROUND</button>
-              <button class="ai-node" data-ai="reason">06 REASON</button>
-            </div>
-            <div class="console-screen">
-              <div class="crt-lines"></div>
-              <div class="console-header"><span>PROCESS MONITOR</span><span id="aiStageCode">INGEST_01</span></div>
-              <h3 id="aiStageTitle">Messy inputs are where the real system starts.</h3>
-              <p id="aiStageText">Documents, scanned pages, voice, structured files — the first problem is getting useful information into a form the rest of the system can trust.</p>
-              <div id="aiStageTools" class="terminal-chips"></div>
-              <pre id="aiLog">[OK] input channels mounted\n[OK] metadata preserved\n[WAIT] next stage</pre>
+        <div class="ai-layout">
+          <div class="ai-monitor window dark-window">
+            <div class="window-bar terminal"><span>FIZZA_AI_LAB.EXE</span><span id="aiState">PROCESS 04/06</span></div>
+            <div class="ai-screen">
+              <div class="crt-noise"></div>
+              <div class="ai-pipeline" id="aiPipeline">
+                <button data-step="0">01<br>INGEST</button>
+                <button data-step="1">02<br>UNDERSTAND</button>
+                <button data-step="2">03<br>REPRESENT</button>
+                <button data-step="3" class="active">04<br>RETRIEVE</button>
+                <button data-step="4">05<br>GROUND</button>
+                <button data-step="5">06<br>REASON</button>
+              </div>
+              <div class="ai-readout">
+                <span id="aiCode">RETRIEVE_04</span>
+                <h3 id="aiTitle">Find the right evidence fast.</h3>
+                <p id="aiText">Vector storage and approximate nearest-neighbor search turn embeddings into usable retrieval instead of a very expensive pile of numbers.</p>
+                <div id="aiTools" class="chip-row"></div>
+                <pre id="aiLog">[OK] pgvector connected\n[OK] HNSW index online\n[OK] cosine search ready</pre>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div class="rag-case game-panel">
-          <div class="game-panel-title">BOSS FIGHT // RAG DOCUMENT ASSISTANT</div>
-          <div class="rag-layout">
-            <div class="rag-copy">
-              <h3>Built the whole path,<br>not just the chat box.</h3>
-              <p>Multi-format ingestion, OCR, voice input, embeddings, vector retrieval, grounded generation, citations, memory, user isolation, evaluation, and Dockerized services.</p>
-              <div class="mission-list">
-                <span>✓ Tesseract OCR fallback</span><span>✓ faster-whisper + VAD</span><span>✓ pgvector + HNSW</span><span>✓ Ollama local models</span><span>✓ citations + memory</span><span>✓ FastAPI + Docker</span>
-              </div>
-              <a href="https://github.com/fizzahussain/Rag-Document-Assistant" target="_blank" rel="noreferrer" class="pixel-btn green">OPEN REPOSITORY</a>
-            </div>
-            <div class="rag-machine">
-              <div class="machine-input"><span>PDF</span><span>VOICE</span><span>DOCX</span></div>
-              <div class="machine-arrow">→</div>
-              <div class="machine-core">RAG<br><small>retrieve / ground / answer</small></div>
-              <div class="machine-arrow">→</div>
-              <div class="machine-output">ANSWER<br><small>[C1] [C2] [C3]</small></div>
-            </div>
+          <div class="boss-panel">
+            <span class="boss-label">BOSS FIGHT</span>
+            <h3>RAG Document Assistant</h3>
+            <p class="boss-line">Built the whole path, not just the chat box.</p>
+            <ul>
+              <li>multi-format document ingestion</li><li>selective OCR fallback</li><li>voice input with faster-whisper</li><li>context-aware chunking</li><li>pgvector + HNSW retrieval</li><li>grounded answers + citations</li><li>multi-user isolation</li><li>Dockerized services</li>
+            </ul>
+            <a href="https://github.com/fizzahussain/Rag-Document-Assistant" class="pixel-cta lime" target="_blank" rel="noreferrer">VIEW BOSS FILE ↗</a>
           </div>
         </div>
       </section>
 
-      <section id="projects" class="scene project-scene">
-        <div class="scene-head">
-          <span class="level-tag">LEVEL 03 / QUEST SELECT</span>
-          <h2>PICK A QUEST.<br><span class="pink-text">I HAVE RANGE.</span></h2>
-          <p>Not every project is the same kind of flex. Filter by what you want to inspect.</p>
+      <section id="data" class="stage data-stage">
+        <div class="stage-head">
+          <span>STAGE 03 // DATA SCIENCE SAVE FILES</span>
+          <h2>DATA IS WHERE<br><em>THE NEXT LEVEL STARTS.</em></h2>
+          <p>Two newer projects push the portfolio deeper into prediction, analysis, visualization, and behavioral patterns — exactly where I want the next part of my work to grow.</p>
         </div>
-
-        <div class="quest-toolbar pixel-window gray">
-          <div class="titlebar cobalt"><span>Quest Explorer — C:\FIZZA\projects\</span><span>□ ×</span></div>
-          <div class="toolbar-body">
-            <button class="quest-filter active" data-filter="all">ALL</button>
-            <button class="quest-filter" data-filter="data">AI / DATA</button>
-            <button class="quest-filter" data-filter="fullstack">FULL STACK</button>
-            <button class="quest-filter" data-filter="algorithms">ALGORITHMS</button>
-            <button class="quest-filter" data-filter="systems">SYSTEMS</button>
-            <button class="quest-filter" data-filter="lowlevel">LOW LEVEL</button>
-          </div>
+        <div class="save-select">
+          <article class="save-slot house-slot">
+            <div class="slot-number">SAVE 01</div><div class="slot-icon">⌂</div>
+            <div><h3>Islamabad House Price Prediction</h3><p>Machine-learning work focused on learning how property features and location relate to house prices in Islamabad.</p><div class="chip-row"><span>Machine Learning</span><span>Regression</span><span>EDA</span><span>Python</span></div></div>
+            <a href="https://github.com/fizzahussain/Islamabad-House-Price-Prediction" target="_blank" rel="noreferrer">LOAD SAVE ↗</a>
+          </article>
+          <article class="save-slot pubg-slot">
+            <div class="slot-number">SAVE 02</div><div class="slot-icon">◎</div>
+            <div><h3>PUBG Player Performance &amp; Behavioral Analysis</h3><p>A data-analysis project exploring player performance and behavioral patterns through the lens of game telemetry and measurable outcomes.</p><div class="chip-row"><span>Data Analysis</span><span>Behavior</span><span>Visualization</span><span>Python</span></div></div>
+            <a href="https://github.com/fizzahussain/PUBG-Player-Performance-Behavioral-Analysis" target="_blank" rel="noreferrer">LOAD SAVE ↗</a>
+          </article>
         </div>
-
-        <div id="questGrid" class="quest-grid"></div>
       </section>
 
-      <section id="about" class="scene about-scene">
-        <div class="scene-head">
-          <span class="level-tag">LEVEL 04 / ABOUT THE PLAYER</span>
-          <h2>I DON’T HAVE A<br><span class="blue-text">“NON-TECH SIDE.”</span></h2>
-          <p>The same brain that likes vector search also likes paint, clay, motion, argument, composition, and making something from nothing.</p>
+      <section id="projects" class="stage projects-stage">
+        <div class="stage-head">
+          <span>STAGE 04 // QUEST MAP</span>
+          <h2>CHOOSE WHAT YOU<br>WANT TO <em>INSPECT.</em></h2>
+          <p>No endless card wall. Pick a discipline and the map redraws around the kind of work you care about.</p>
         </div>
-
-        <div class="about-layout">
-          <div class="scrapbook pixel-window cream">
-            <div class="titlebar peach"><span>about_me.scrapbook</span><span>♡</span></div>
-            <div class="scrapbook-body">
-              <div class="hand-note note-a">I build with structure,<br>but I think like an artist.</div>
-              <div class="polaroid p1"><img src="media/art/rabbit-study.jpeg" alt="Rabbit mini canvas"><span>tiny studies / big joy</span></div>
-              <div class="polaroid p2"><img src="media/life/basketball.jpeg" alt="Basketball"><span>movement matters</span></div>
-              <div class="polaroid p3"><img src="media/art/clay-candle-holder.jpeg" alt="Handmade clay candle holder"><span>clay / candle holder</span></div>
-              <div class="polaroid p4"><img src="media/life/horse-riding.jpeg" alt="Horse riding memories"><span>horses, always</span></div>
-              <div class="hand-note note-b">painting · pottery · basketball · badminton · horse riding · swimming · debating · baking</div>
-            </div>
+        <div class="quest-ui window gray-window">
+          <div class="window-bar blue"><span>QUEST_MAP.EXE — C:\FIZZA\PROJECTS\</span><span>_ □ ×</span></div>
+          <div class="quest-toolbar" id="questFilters">
+            <button class="active" data-filter="all">ALL</button><button data-filter="data">AI / DATA</button><button data-filter="fullstack">FULL STACK</button><button data-filter="algorithms">ALGORITHMS</button><button data-filter="systems">SYSTEMS</button><button data-filter="lowlevel">LOW LEVEL</button><button data-filter="ui">UI / WEB</button>
           </div>
-
-          <div class="profile-tabs pixel-window white">
-            <div class="titlebar cobalt"><span>PLAYER_DATA.DAT</span><span>?</span></div>
-            <div class="tab-strip">
-              <button class="profile-tab active" data-tab="profile">PROFILE</button>
-              <button class="profile-tab" data-tab="academics">ACADEMICS</button>
-              <button class="profile-tab" data-tab="hobbies">SIDE QUESTS</button>
-              <button class="profile-tab" data-tab="leadership">LEADERSHIP</button>
-            </div>
-            <div id="profilePanel" class="tab-panel"></div>
+          <div class="quest-layout">
+            <div id="questList" class="quest-list"></div>
+            <div id="questPreview" class="quest-preview"></div>
           </div>
         </div>
+      </section>
 
-        <div class="art-browser pixel-window gray">
-          <div class="titlebar blue"><span>Image Browser — C:\FIZZA\creative_archive\</span><span>_ □ ×</span></div>
-          <div class="browser-toolbar"><button id="prevArt">← BACK</button><span id="artPath">/paintings/all</span><button id="nextArt">NEXT →</button></div>
-          <div class="art-browser-grid">
-            <div id="artThumbs" class="art-thumbs"></div>
-            <div class="art-preview">
-              <div class="preview-stage"><img id="artPreviewImg" alt="Selected artwork"></div>
-              <div class="preview-info">
-                <span id="artCounter">01 / 13</span>
-                <h3 id="artPreviewTitle">Rabbit study</h3>
-                <p id="artPreviewMeta">Acrylic mini canvas</p>
-                <p id="artPreviewNote">Small format, close observation, no need to over-explain it.</p>
+      <section id="skills" class="stage skills-stage">
+        <div class="stage-head inverted">
+          <span>STAGE 05 // SKILL TREE + COURSEWARE</span>
+          <h2>TOOLS AREN’T<br>COLLECTIBLES.<br><em>THEY HAVE JOBS.</em></h2>
+          <p>I’d rather show where a tool lives in my work than turn the page into a wall of logos.</p>
+        </div>
+        <div class="skill-layout">
+          <div class="skill-tree window dark-window">
+            <div class="window-bar magenta"><span>SKILL_TREE.SYS</span><span>LV.05</span></div>
+            <div id="skillTabs" class="skill-tabs"><button class="active" data-skill="AI">AI</button><button data-skill="DATA">DATA</button><button data-skill="BACKEND">BACKEND</button><button data-skill="SYSTEMS">SYSTEMS</button><button data-skill="CREATIVE">CREATIVE</button></div>
+            <div id="skillNodes" class="skill-nodes"></div>
+          </div>
+          <div class="courseware window cream-window">
+            <div class="window-bar cobalt"><span>SEMESTER_05.DLC</span><span>INSTALLED</span></div>
+            <div class="courseware-body">
+              <p class="course-intro">NEW COURSE PACK // currently loaded</p>
+              <div class="course-grid">
+                <div><b>CS2009</b><span>Design and Analysis of Algorithms</span></div>
+                <div><b>DS2003</b><span>Advanced Statistics</span></div>
+                <div><b>DS3001</b><span>Data Analysis and Visualization</span></div>
+                <div><b>DL3001</b><span>Data Analysis and Visualization — Lab</span></div>
+                <div><b>DS3004</b><span>Data Warehousing and Business Intelligence</span></div>
+                <div><b>DL3004</b><span>Data Warehousing and Business Intelligence — Lab</span></div>
+                <div><b>SS2012</b><span>Technical and Business Writing</span></div>
               </div>
+              <div class="course-history"><b>FOUNDATIONS ALREADY CLEARED</b><span>Data Structures &amp; Algorithms · OOP · Artificial Intelligence · Intro to Data Science · DBMS · Operating Systems · Probability &amp; Statistics · Software Engineering</span></div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="experience" class="scene timeline-scene">
-        <div class="scene-head light-on-dark">
-          <span class="level-tag">LEVEL 05 / SAVE FILE</span>
-          <h2>THE LOG IS MESSY.<br>THAT’S THE POINT.</h2>
-          <p>Data Science student, builder, tutor, designer, society lead, intern, athlete, artist. I’d rather have range with a direction than one perfectly straight line.</p>
+      <section id="about" class="stage about-stage">
+        <div class="stage-head">
+          <span>STAGE 06 // PLAYER LORE</span>
+          <h2>I MAKE THINGS<br>WITH <em>LOGIC + INSTINCT.</em></h2>
+          <p>Painting, pottery, sport, debate, design, and engineering don’t feel like separate personalities to me. They’re different ways of observing, experimenting, practicing, and making something intentional.</p>
         </div>
-
-        <div class="save-layout">
-          <div class="save-card pixel-window cream">
-            <div class="titlebar blue"><span>ACADEMIC_SAVE_01</span><span>★</span></div>
-            <div class="save-body">
-              <div class="save-icon">🎓</div>
-              <div><span>PROGRAM</span><strong>BS Data Science</strong></div>
-              <div><span>LOCATION</span><strong>FAST-NUCES Islamabad</strong></div>
-              <div><span>EXPECTED GRADUATION</span><strong>2028</strong></div>
-              <div><span>PROGRESS</span><strong>4 semesters · 74 credit hours</strong></div>
-              <div><span>ACHIEVEMENT</span><strong>Dean’s Honor List · Spring 2025 & 2026</strong></div>
-              <div class="course-tags"><i>DSA</i><i>OOP</i><i>AI</i><i>Data Science</i><i>DBMS</i><i>Operating Systems</i><i>Probability & Statistics</i><i>Software Engineering</i></div>
+        <div class="about-grid">
+          <div class="character-window window cream-window draggable">
+            <div class="window-bar pink"><span>ABOUT_FIZZA.EXE</span><span>♡</span></div>
+            <div class="character-body">
+              <div class="character-copy"><h3>I make things — with code, data, paint, clay, and a lot of curiosity.</h3><p>My main direction is AI &amp; Data Science, but the way I think has always been mixed: analytical enough to enjoy systems, visual enough to care how they feel, competitive enough to love sport, and curious enough to keep picking up new side quests.</p></div>
+              <div class="life-strip"><img src="media/crops/basketball-portrait.webp" alt="Basketball"><img src="media/crops/horse-riding-portrait.webp" alt="Horse riding"><img src="media/crops/clay-candle-holder-portrait.webp" alt="Handmade clay candle holder"></div>
+              <div class="hobby-inventory"><span>🎨 Painting</span><span>🏺 Pottery</span><span>🏀 Basketball</span><span>🏸 Badminton</span><span>🐎 Horse riding</span><span>🏊 Swimming</span><span>🎙 Debating</span><span>🧁 Baking</span></div>
             </div>
           </div>
-
-          <div class="log-terminal pixel-window black">
-            <div class="titlebar terminal-green"><span>career_log.exe</span><span>RUNNING</span></div>
-            <div id="careerLog" class="career-log"></div>
+          <div class="academic-window window white-window">
+            <div class="window-bar blue"><span>ACADEMIC_PROFILE.DAT</span><span>READ ONLY</span></div>
+            <div class="academic-body"><p><span>PROGRAM</span><b>BS Data Science</b></p><p><span>UNIVERSITY</span><b>FAST-NUCES Islamabad</b></p><p><span>EXPECTED GRADUATION</span><b>2028</b></p><p><span>PROGRESS</span><b>4 semesters completed · 74 credit hours</b></p><p><span>RECOGNITION</span><b>Dean’s Honor List — Spring 2025 &amp; Spring 2026</b></p><p><span>CURRENT DIRECTION</span><b>AI / ML · Data Science · intelligent systems</b></p></div>
           </div>
+        </div>
+
+        <div class="art-browser window gray-window">
+          <div class="window-bar blue"><span>IMAGE BROWSER — C:\FIZZA\MY_ART\</span><span>_ □ ×</span></div>
+          <div class="art-toolbar"><button id="prevArt">◀ PREV</button><button id="shuffleArt">⤨ SHUFFLE</button><span id="artPath">C:\FIZZA\MY_ART\paintings\</span><button id="nextArt">NEXT ▶</button></div>
+          <div class="art-layout"><div id="artThumbs" class="art-thumbs"></div><div class="art-preview"><div class="art-canvas"><img id="artPreviewImg" alt="Selected artwork"></div><div class="art-caption"><span id="artCounter">01 / 13</span><h3 id="artPreviewTitle">Rabbit study</h3><p id="artPreviewMeta">Acrylic mini canvas</p><p id="artPreviewNote">Small format, close observation, and the kind of thing I make because I feel like making it.</p></div></div></div>
         </div>
       </section>
 
-      <section id="contact" class="scene contact-scene">
-        <div class="end-screen pixel-window black">
-          <div class="titlebar hot-pink"><span>QUEST COMPLETE?</span><span>NOT YET.</span></div>
-          <div class="end-body">
-            <div class="end-score">CONTINUE?</div>
-            <h2>LET’S BUILD THE NEXT THING.</h2>
-            <p>AI / Data Science · ML / LLM systems · Software Engineering · Backend · Research · Data-intensive products</p>
-            <div class="continue-buttons">
-              <a href="mailto:fizzashah0300@gmail.com" class="pixel-btn green">EMAIL</a>
-              <a href="https://www.linkedin.com/in/fizza-hussain-97a171279" target="_blank" rel="noreferrer" class="pixel-btn bluebtn">LINKEDIN</a>
-              <a href="https://github.com/fizzahussain" target="_blank" rel="noreferrer" class="pixel-btn white">GITHUB</a>
-            </div>
-            <div class="end-small">FIZZA HUSSAIN // 2026 // built by hand, not from a template</div>
-          </div>
+      <section id="log" class="stage log-stage">
+        <div class="stage-head inverted"><span>STAGE 07 // SAVE HISTORY</span><h2>THE PATH ISN’T<br>PERFECTLY LINEAR.<br><em>GOOD.</em></h2><p>I’ve moved through data, software, teaching, design, marketing, technical societies, community work, and creative roles. The useful part is what each one taught me to carry into the next.</p></div>
+        <div class="log-layout">
+          <div class="career-console window dark-window"><div class="window-bar terminal"><span>CAREER_LOG.TXT</span><span>RUNNING</span></div><div id="careerLog" class="career-log"></div></div>
+          <div class="leadership-board"><article><span>FAST DATA SCIENCE SOCIETY</span><p>Projects, marketing, content, and leadership roles.</p></article><article><span>NASCON</span><p>Head — Data Detective · Officer — Edathon.</p></article><article><span>IEEE</span><p>Member · IEEE Computer Society · IEEE Islamabad Chapter.</p></article><article><span>WOMEN IN COMPUTING</span><p>Member at FAST-NUCES.</p></article><article><span>EARLIER LEADERSHIP</span><p>Business &amp; Economics Society, MUN, sports events, student council, and more.</p></article></div>
         </div>
+      </section>
+
+      <section id="contact" class="stage ending-stage">
+        <div class="ending-window window cream-window"><div class="window-bar cobalt"><span>SAVE_AND_CONTINUE?</span><span>♡</span></div><div class="ending-body"><p class="ending-kicker">PLAYER 01 // STILL BUILDING</p><h2>Want to build something<br>interesting with me?</h2><p>AI / Data Science · ML / LLM engineering · software engineering · backend · data-intensive systems · research · internships · collaborative projects.</p><div class="ending-actions"><a href="mailto:fizzashah0300@gmail.com" class="pixel-cta yellow">EMAIL</a><a href="https://www.linkedin.com/in/fizza-hussain-97a171279" target="_blank" rel="noreferrer" class="pixel-cta bluebtn">LINKEDIN</a><a href="https://github.com/fizzahussain" target="_blank" rel="noreferrer" class="pixel-cta lime">GITHUB</a></div><small>fizzashah0300@gmail.com</small></div></div>
       </section>
     </main>
 
-    <div id="toast" class="achievement-toast" role="status"><strong>ACHIEVEMENT UNLOCKED</strong><span>Curiosity +1</span></div>
+    <div id="mapPanel" class="map-overlay hidden"><div class="map-window window cream-window"><div class="window-bar cobalt"><span>WORLD_MAP.EXE</span><button id="closeMap">×</button></div><div class="map-grid"><a href="#home">01<span>PLAYER</span></a><a href="#ai">02<span>AI LAB</span></a><a href="#data">03<span>DATA</span></a><a href="#projects">04<span>QUESTS</span></a><a href="#skills">05<span>SKILLS</span></a><a href="#about">06<span>ABOUT</span></a><a href="#log">07<span>LOG</span></a><a href="#contact">08<span>CONTACT</span></a></div><p>Keyboard: 1–8 jump sections · M opens map · A opens art · P opens projects</p></div></div>
 
-    <div id="projectModal" class="modal-shell" hidden>
-      <div class="modal-window pixel-window cream" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-        <div class="titlebar cobalt"><span id="modalBar">PROJECT_PROPERTIES.EXE</span><button id="closeProject">×</button></div>
-        <div class="modal-body">
-          <div class="modal-left"><div id="modalIcon" class="project-big-icon">💾</div><span id="modalCode">QUEST 00</span></div>
-          <div class="modal-right"><h2 id="modalTitle"></h2><p id="modalSummary"></p><div class="modal-proof"><span>WHY IT MATTERS</span><strong id="modalProof"></strong></div><div id="modalDetails" class="modal-details"></div><div id="modalTags" class="modal-tags"></div><a id="modalRepo" target="_blank" rel="noreferrer" class="pixel-btn yellow">OPEN GITHUB</a></div>
-        </div>
-      </div>
-    </div>
-
-    <div id="startMenu" class="start-menu pixel-window gray" hidden>
-      <div class="start-side">FIZZA<span>2026</span></div>
-      <div class="start-links">
-        <button data-jump="#ai">🧠 AI Lab</button>
-        <button data-jump="#projects">💾 Projects</button>
-        <button data-jump="#about">🎨 Art + About</button>
-        <button data-jump="#experience">📜 Experience</button>
-        <hr>
-        <a href="mailto:fizzashah0300@gmail.com">✉ Email</a>
-        <a href="https://github.com/fizzahussain" target="_blank" rel="noreferrer">⌂ GitHub</a>
-      </div>
-    </div>
+    <div id="achievement" class="achievement hidden"><span>ACHIEVEMENT UNLOCKED</span><b id="achievementText">Curiosity +1</b></div>
   </div>
 
   <script src="script.js"></script>

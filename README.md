@@ -1,57 +1,55 @@
-# FIZZA//SAVE FILE — v7
+# FIZZA//PLAYABLE PORTFOLIO v12
 
-A handcrafted static portfolio for Fizza Hussain, designed as a hybrid of an old operating system, a game save screen, an AI lab, and a personal creative archive.
+A dependency-free, Vercel-ready portfolio built as a navigable retro game / old-OS world.
 
-## What changed in v7
+## What changed in v12
 
-- Replaced the generic art-wall player image with real portrait photography
-- Added a 4-photo interactive player camera
-- Added a personal camera roll to the About section
-- Rewrote the hero copy to feel more personal and less portfolio-template-like
-- Made floral watercolor, calligraphy/branches, and birds/blossoms explicitly featured instead of buried in thumbnails
-- Added art filters for paintings, mini canvases, studio archive, and clay/baking
-- Improved thumbnail cropping and artwork presentation
-- Preserved the corrected pottery/baking distinction
-- Kept all Semester 5 coursework, both new Data Science projects, and the existing AI/software/systems work
-- Refined the game/OS visual language with more deliberate windows, HUD details, scan UI, photo controls, and physical-card styling
+- Uses the new supplied pixel avatar as the playable character
+- Player world is now the navigation hub with seven clear destinations
+- Removed the live-project strip from the main hero
+- Added a complete 14-project Quest Directory with filters and search
+- Every project detail links to its GitHub README for deeper technical context
+- Live demo buttons include a clear deployment disclaimer
+- Islamabad House Price Prediction and PUBG analysis include both Live Demo and GitHub README actions
+- Rebuilt Experience + Leadership into aligned, matching windows instead of scattered sticky notes
+- Keeps RAG and Personal Finance video demos
+- Keeps the verified art archive and removes unused incorrect wall-art crop files
+
+## Navigation
+
+In `PLAYER_WORLD.EXE`:
+
+- `WASD` or arrow keys move the avatar
+- click inside the world to walk
+- walk near a location and press `Enter`
+- or click any location directly
+
+The HUD and `WORLD_MAP.EXE` remain available at all times, so the game interaction never blocks normal navigation.
+
+## Projects
+
+The Quest Directory contains all 14 projects in one searchable list. Use category filters or type a project name.
+
+Live deployments are labeled as demos. The portfolio shows this disclaimer:
+
+> Live demos are adapted web versions created for demonstration and deployment purposes and may differ from the original project implementation.
+
+For architecture, implementation notes, setup, limitations, algorithms, and deeper technical details, use the `READ GITHUB README` button on each project.
 
 ## Run locally
+
+No npm install is required.
 
 ```bash
 python -m http.server 8000
 ```
 
-Then open:
+Open:
 
 ```text
 http://localhost:8000
 ```
 
-## Deploy to Vercel
+## Deploy
 
-This site is plain HTML/CSS/JavaScript with no dependencies.
-
-Import the folder/repository into Vercel and deploy it as a static site.
-
-
-## Demo videos
-
-Two real walkthroughs are bundled into the portfolio and open in the retro media player:
-
-- `media/demos/rag-document-assistant-demo.mp4` — RAG Document Assistant (~5:50)
-- `media/demos/personal-finance-demo.mp4` — Personal Finance / FinanceFlow (~3:20)
-
-Poster frames are stored alongside them and the demos are accessible from the RAG boss panel and project Quest Map.
-
-
-## V9 refinement
-
-- player camera now uses one curated portrait
-- a second portrait appears only at the ending, not as a camera roll
-- GitHub is available from the first screen
-- expected graduation 2028 is shown in the player panel
-- Personal Finance now exposes its demo button
-- Data Analytics internship corrected to 2024
-- expanded art archive with deer mini canvas, wall-detail paintings, cow clay figure, and existing painting/craft work
-- visible em dashes removed from copy where possible
-- section palette diversified while preserving the retro game / old-OS visual language
+This is a static site and can be deployed directly to Vercel. See `DEPLOY.md`.

@@ -1,20 +1,30 @@
-# Deploy
+# Deploy to Vercel
 
-## Vercel
+This portfolio is a static HTML/CSS/JavaScript site and has no build dependencies.
 
-1. Push this folder to a GitHub repository
-2. Import the repository in Vercel
-3. Framework preset: **Other**
-4. Build command: leave empty
-5. Output directory: leave empty
-6. Deploy
+## Option 1: GitHub + Vercel
 
-The site is static and has no runtime dependencies.
+1. Push the folder contents to a GitHub repository
+2. In Vercel, choose **Add New > Project**
+3. Import the repository
+4. Framework preset: **Other**
+5. Build command: leave empty
+6. Output directory: leave empty / repository root
+7. Deploy
 
-## Local preview
+`vercel.json` is already included.
+
+## Option 2: Vercel CLI
 
 ```bash
-python -m http.server 8000
+npm i -g vercel
+vercel
 ```
 
-Open `http://localhost:8000`.
+Follow the prompts and use the current folder as the project root.
+
+## Before final public launch
+
+- verify every live-demo URL
+- keep project GitHub repositories public if you want README links to work for recruiters
+- test keyboard navigation, project search, demo video playback, and mobile layout

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#080808" />
   <meta name="description" content="Fizza Hussain // AI & Data Science, software engineering, systems, art, and side quests." />
-  <title>FIZZA//SAVE FILE 2026</title>
+  <title>FIZZA//PLAYABLE PORTFOLIO 2026</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +27,7 @@
       </div>
       <p class="boot-help">PRESS START · no tutorial required · secrets hidden in the interface</p>
     </div>
-    <div class="boot-scene art-card"><img src="media/portraits/night-seated-square.webp" alt="Fizza Hussain"><span class="boot-photo-tag">PLAYER_01.JPG</span></div>
+    <div class="boot-scene art-card avatar-boot-card"><img src="media/ui/fizza-coding-avatar.png" alt="Pixel avatar of Fizza coding"><span class="boot-photo-tag">PLAYER_BUILD_PREVIEW.PNG</span></div>
     <div class="boot-scene data-card"><span>DATA STREAM</span><b>RAG</b><b>ML</b><b>SQL</b><b>C++</b></div>
     <div class="boot-avatar-card"><img src="media/crops/calligraphy-branches-sq.webp" alt="Calligraphy and branches painting"><span>INVENTORY: CODE + PAINT</span></div>
   </div>
@@ -83,27 +83,43 @@
               <a href="#about" class="pixel-cta yellow">OPEN MY WORLD</a>
               <a href="https://github.com/fizzahussain" target="_blank" rel="noreferrer" class="pixel-cta githubbtn">GITHUB ↗</a>
             </div>
-          </div>
+</div>
 
-          <div class="hero-console player-console">
-            <div class="console-top"><span>PLAYER_CAM.EXE</span><span class="blink">● LIVE</span></div>
+          <div class="hero-console player-console avatar-console">
+            <div class="console-top"><span>PLAYER_WORLD.EXE</span><span class="blink">● READY</span></div>
             <div class="console-body">
-              <div class="avatar-panel player-photo-panel">
-                <img id="playerPhoto" src="media/portraits/night-seated-wide.webp" alt="Fizza Hussain, player portrait">
-                <div class="target-box"></div>
-                <span class="scan-label">FIZZA_H // HUMAN</span>
+              <div class="avatar-world" id="avatarWorld" tabindex="0" aria-label="Interactive player world. Use WASD or arrow keys to move Fizza around.">
+                <div class="world-sky">
+                  <span class="pixel-star s1">✦</span><span class="pixel-star s2">✦</span><span class="pixel-star s3">✦</span>
+                  <span class="pixel-cloud c1"></span><span class="pixel-cloud c2"></span>
+                </div>
+                <div class="world-road road-h"></div><div class="world-road road-v"></div>
+                <button class="world-portal portal-ai" data-warp="#ai"><span>AI</span><small>AI LAB</small></button>
+                <button class="world-portal portal-data" data-warp="#data"><span>DS</span><small>DATA LAB</small></button>
+                <button class="world-portal portal-projects" data-warp="#projects"><span>14</span><small>PROJECTS</small></button>
+                <button class="world-portal portal-skills" data-warp="#skills"><span>SK</span><small>SKILLS</small></button>
+                <button class="world-portal portal-art" data-warp="#about"><span>ART</span><small>STUDIO</small></button>
+                <button class="world-portal portal-log" data-warp="#log"><span>XP</span><small>CAREER</small></button>
+                <button class="world-portal portal-contact" data-warp="#contact"><span>@</span><small>CONTACT</small></button>
+                <div class="world-ground"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                <div class="world-legend"><b>WORLD HUB</b><span>7 locations · 14 project quests</span><a href="https://github.com/fizzahussain" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+                <div class="player-avatar" id="playerAvatar" aria-hidden="true">
+                  <img src="media/ui/fizza-avatar.png" alt="">
+                  <span class="player-shadow"></span>
+                  <span class="nameplate">FIZZA</span>
+                </div>
+                <div class="world-hint"><b>MOVE</b> WASD / ARROWS / CLICK <span>•</span> WALK INTO A PORTAL</div>
               </div>
-              <div class="console-data player-data">
+              <div class="console-data player-data avatar-data">
                 <p><span>CLASS</span><b>BS DATA SCIENCE</b></p>
                 <p><span>BASE</span><b>FAST-NUCES ISLAMABAD</b></p>
                 <p><span>EXPECTED GRADUATION</span><b>2028</b></p>
                 <p><span>MAIN QUEST</span><b>AI · ML · DATA</b></p>
-                <p><span>SECONDARY TREE</span><b>SOFTWARE · SYSTEMS · DESIGN</b></p>
               </div>
-              <div class="quest-queue">
-                <span>NOW PLAYING</span>
-                <b>RAG / ML / DATA VISUALIZATION</b>
-                <small>+ painting after hours · horse riding when possible · debate forever</small>
+              <div class="quest-queue avatar-quest">
+                <span>PLAYER NOTE</span>
+                <b>AVATAR EQUIPPED. QUEST MAP ONLINE. DEV MODE ON.</b>
+                <small>Walk to any location, or click a destination directly. Every section is also available from the HUD and World Map.</small>
               </div>
             </div>
           </div>
@@ -148,7 +164,7 @@
             </ul>
             <div class="boss-actions">
               <button id="openRagDemo" class="pixel-cta yellow demo-launch">▶ WATCH DEMO</button>
-              <a href="https://github.com/fizzahussain/Rag-Document-Assistant" class="pixel-cta lime" target="_blank" rel="noreferrer">VIEW BOSS FILE ↗</a>
+              <a href="https://github.com/fizzahussain/Rag-Document-Assistant" class="pixel-cta lime" target="_blank" rel="noreferrer">READ GITHUB README ↗</a>
             </div>
           </div>
         </div>
@@ -164,14 +180,15 @@
           <article class="save-slot house-slot">
             <div class="slot-number">SAVE 01</div><div class="slot-icon">⌂</div>
             <div><h3>Islamabad House Price Prediction</h3><p>Machine-learning work focused on learning how property features and location relate to house prices in Islamabad.</p><div class="chip-row"><span>Machine Learning</span><span>Regression</span><span>EDA</span><span>Python</span></div></div>
-            <a href="https://github.com/fizzahussain/Islamabad-House-Price-Prediction" target="_blank" rel="noreferrer">LOAD SAVE ↗</a>
+            <div class="save-actions"><a href="https://islamabad-house-price-prediction.vercel.app/" target="_blank" rel="noreferrer">LIVE DEMO ↗</a><a href="https://github.com/fizzahussain/Islamabad-House-Price-Prediction" target="_blank" rel="noreferrer">GITHUB README ↗</a></div>
           </article>
           <article class="save-slot pubg-slot">
             <div class="slot-number">SAVE 02</div><div class="slot-icon">◎</div>
             <div><h3>PUBG Player Performance &amp; Behavioral Analysis</h3><p>A data-analysis project exploring player performance and behavioral patterns through the lens of game telemetry and measurable outcomes.</p><div class="chip-row"><span>Data Analysis</span><span>Behavior</span><span>Visualization</span><span>Python</span></div></div>
-            <a href="https://github.com/fizzahussain/PUBG-Player-Performance-Behavioral-Analysis" target="_blank" rel="noreferrer">LOAD SAVE ↗</a>
+            <div class="save-actions"><a href="https://pubg-player-performance-behavioral.vercel.app/" target="_blank" rel="noreferrer">LIVE DEMO ↗</a><a href="https://github.com/fizzahussain/PUBG-Player-Performance-Behavioral-Analysis" target="_blank" rel="noreferrer">GITHUB README ↗</a></div>
           </article>
         </div>
+        <div class="demo-disclaimer data-disclaimer"><b>DEMO NOTICE</b><p><strong>Disclaimer:</strong> Live demos are adapted web versions created for demonstration and deployment purposes and may differ from the original project implementation. For architecture, implementation details, setup, limitations, and deeper technical notes, open the project&apos;s GitHub README.</p></div>
       </section>
 
       <section id="projects" class="stage projects-stage">
@@ -182,9 +199,13 @@
         </div>
         <div class="quest-ui window gray-window">
           <div class="window-bar blue"><span>QUEST_MAP.EXE // C:\FIZZA\PROJECTS\</span><span>_ □ ×</span></div>
-          <div class="quest-toolbar" id="questFilters">
-            <button class="active" data-filter="all">ALL</button><button data-filter="data">AI / DATA</button><button data-filter="fullstack">FULL STACK</button><button data-filter="algorithms">ALGORITHMS</button><button data-filter="systems">SYSTEMS</button><button data-filter="lowlevel">LOW LEVEL</button><button data-filter="ui">UI / WEB</button>
+          <div class="quest-toolbar-wrap">
+            <div class="quest-toolbar" id="questFilters">
+              <button class="active" data-filter="all">ALL</button><button data-filter="data">AI / DATA</button><button data-filter="fullstack">FULL STACK</button><button data-filter="algorithms">ALGORITHMS</button><button data-filter="systems">SYSTEMS</button><button data-filter="lowlevel">LOW LEVEL</button><button data-filter="ui">UI / WEB</button>
+            </div>
+            <label class="quest-search"><span>FIND QUEST</span><input id="projectSearch" type="search" placeholder="type a project name..." autocomplete="off"></label>
           </div>
+          <div class="quest-status"><b id="questCount">14 / 14 PROJECTS LOADED</b><span>Click any project on the left. Live demos and GitHub README links appear on the right.</span></div>
           <div class="quest-layout">
             <div id="questList" class="quest-list"></div>
             <div id="questPreview" class="quest-preview"></div>
@@ -202,7 +223,7 @@
           <div class="skill-tree window dark-window">
             <div class="window-bar magenta"><span>SKILL_TREE.SYS</span><span>LV.05</span></div>
             <div id="skillTabs" class="skill-tabs"><button class="active" data-skill="AI">AI</button><button data-skill="DATA">DATA</button><button data-skill="BACKEND">BACKEND</button><button data-skill="SYSTEMS">SYSTEMS</button><button data-skill="CREATIVE">CREATIVE</button></div>
-            <div id="skillNodes" class="skill-nodes"></div>
+            <div id="skillNodes" class="skill-nodes"></div><div class="coding-sprite" aria-hidden="true"><img src="media/ui/fizza-coding-avatar.png" alt=""><span>DEV_MODE: ON</span></div>
           </div>
           <div class="courseware window cream-window">
             <div class="window-bar cobalt"><span>SEMESTER_05.DLC</span><span>INSTALLED</span></div>
@@ -260,10 +281,23 @@
       </section>
 
       <section id="log" class="stage log-stage">
-        <div class="stage-head inverted"><span>STAGE 07 // SAVE HISTORY</span><h2>THE PATH ISN’T<br>PERFECTLY LINEAR.<br><em>GOOD.</em></h2><p>I’ve moved through data, software, teaching, design, marketing, technical societies, community work, and creative roles. The useful part is what each one taught me to carry into the next.</p></div>
-        <div class="log-layout">
-          <div class="career-console window dark-window"><div class="window-bar terminal"><span>CAREER_LOG.TXT</span><span>RUNNING</span></div><div id="careerLog" class="career-log"></div></div>
-          <div class="leadership-board"><article><span>FAST DATA SCIENCE SOCIETY</span><p>Projects, marketing, content, and leadership roles.</p></article><article><span>NASCON</span><p>Head // Data Detective · Officer // Edathon.</p></article><article><span>IEEE</span><p>Member · IEEE Computer Society · IEEE Islamabad Chapter.</p></article><article><span>WOMEN IN COMPUTING</span><p>Member at FAST-NUCES.</p></article><article><span>EARLIER LEADERSHIP</span><p>Business &amp; Economics Society, MUN, sports events, student council, and more.</p></article></div>
+        <div class="stage-head inverted log-head"><span>STAGE 07 // SAVE HISTORY</span><h2>EXPERIENCE,<br><em>WITHOUT THE CHAOS.</em></h2><p>The path crosses data, software, teaching, design, marketing, technical societies, and community work. This screen keeps the timeline and leadership record in one aligned system.</p></div>
+        <div class="experience-center">
+          <section class="career-console window dark-window experience-window">
+            <div class="window-bar terminal"><span>WORK_HISTORY.EXE</span><span>09 RECORDS</span></div>
+            <div class="experience-header"><span>YEAR</span><span>ROLE / ORGANIZATION</span><span>TRACK</span></div>
+            <div id="careerLog" class="career-log"></div>
+          </section>
+          <section class="leadership-console window cream-window experience-window">
+            <div class="window-bar cobalt"><span>COMMUNITY_AND_LEADERSHIP.DIR</span><span>05 FILES</span></div>
+            <div class="leadership-list">
+              <article><span class="leadership-id">01</span><div><b>FAST Data Science Society</b><p>Projects, marketing, content creation, and leadership roles across the society.</p></div><small>TECH + COMMUNITY</small></article>
+              <article><span class="leadership-id">02</span><div><b>NasCon</b><p>Head, Data Detective · Officer, Edathon.</p></div><small>EVENT LEADERSHIP</small></article>
+              <article><span class="leadership-id">03</span><div><b>IEEE</b><p>IEEE member · IEEE Computer Society · IEEE Islamabad Chapter.</p></div><small>PROFESSIONAL COMMUNITY</small></article>
+              <article><span class="leadership-id">04</span><div><b>Women in Computing</b><p>Member at FAST-NUCES.</p></div><small>COMMUNITY</small></article>
+              <article><span class="leadership-id">05</span><div><b>Earlier Leadership</b><p>Business &amp; Economics Society, MUN, sports events, student council, and related student leadership.</p></div><small>FOUNDATIONS</small></article>
+            </div>
+          </section>
         </div>
       </section>
 

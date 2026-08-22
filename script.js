@@ -17,24 +17,45 @@ const aiSteps=[
 qsa('#aiPipeline button').forEach(b=>b.onclick=()=>{qsa('#aiPipeline button').forEach(x=>x.classList.remove('active'));b.classList.add('active');const i=+b.dataset.step,d=aiSteps[i];qs('#aiState').textContent=`PROCESS 0${i+1}/06`;qs('#aiCode').textContent=d[0];qs('#aiTitle').textContent=d[1];qs('#aiText').textContent=d[2];qs('#aiTools').innerHTML=d[3].map(x=>`<span>${x}</span>`).join('');qs('#aiLog').textContent=d[4]});qsa('#aiPipeline button')[3].click();
 const projects=[
 {icon:'▣',name:'RAG Document Assistant',cat:['data','fullstack'],tag:'AI SYSTEMS / FLAGSHIP',desc:'Local-first document intelligence across ingestion, OCR, STT, embeddings, vector retrieval, grounded generation, citations, memory and containerized services.',proof:'I can engineer the complete AI path instead of treating the model call as the whole system.',stack:['Python','FastAPI','Ollama','pgvector','HNSW','Tesseract','faster-whisper','Docker'],url:'https://github.com/fizzahussain/Rag-Document-Assistant',demo:'rag'},
-{icon:'⌂',name:'Islamabad House Price Prediction',cat:['data'],tag:'MACHINE LEARNING / REGRESSION',desc:'A newer data-science project focused on predicting Islamabad house prices from property data.',proof:'I am moving deeper from analytical systems into supervised machine-learning workflows and model evaluation.',stack:['Python','Machine Learning','Regression','EDA'],url:'https://github.com/fizzahussain/Islamabad-House-Price-Prediction'},
-{icon:'◎',name:'PUBG Player Performance & Behavioral Analysis',cat:['data'],tag:'DATA ANALYSIS / BEHAVIOR',desc:'A newer analysis project focused on player performance and behavioral patterns in PUBG data.',proof:'I can frame raw behavioral data as an analysis problem and turn it into interpretable patterns and visual evidence.',stack:['Python','Data Analysis','Visualization','Behavioral Analysis'],url:'https://github.com/fizzahussain/PUBG-Player-Performance-Behavioral-Analysis'},
+{icon:'⌂',name:'Islamabad House Price Prediction',cat:['data'],tag:'MACHINE LEARNING / REGRESSION',desc:'A newer data-science project focused on predicting Islamabad house prices from property data.',proof:'I am moving deeper from analytical systems into supervised machine-learning workflows and model evaluation.',stack:['Python','Machine Learning','Regression','EDA'],url:'https://github.com/fizzahussain/Islamabad-House-Price-Prediction',live:'https://islamabad-house-price-prediction.vercel.app/'},
+{icon:'◎',name:'PUBG Player Performance & Behavioral Analysis',cat:['data'],tag:'DATA ANALYSIS / BEHAVIOR',desc:'A newer analysis project focused on player performance and behavioral patterns in PUBG data.',proof:'I can frame raw behavioral data as an analysis problem and turn it into interpretable patterns and visual evidence.',stack:['Python','Data Analysis','Visualization','Behavioral Analysis'],url:'https://github.com/fizzahussain/PUBG-Player-Performance-Behavioral-Analysis',live:'https://pubg-player-performance-behavioral.vercel.app/'},
 {icon:'⌕',name:'Revival Lab',cat:['data'],tag:'FORENSIC RAG / RESEARCH',desc:'Retrieval over a curated archive of forgotten solutions, with evidence-oriented investigation and fallback search.',proof:'I explored semantic retrieval as a research and evidence-navigation problem.',stack:['Python','RAG','ChromaDB','LangChain','OpenAI','Gradio'],url:'https://github.com/fizzahussain/Revival-Lab'},
 {icon:'🍽',name:'MoodMeal',cat:['data','fullstack'],tag:'AI PRODUCT / FULL STACK',desc:'Smart meal planning with pantry tracking, recommendations, expense analytics, expiry awareness and a Gemini-powered assistant.',proof:'I can integrate AI into a real product with users, data, analytics and deployment concerns.',stack:['React','Node.js','Express','MySQL','Gemini API'],url:'https://github.com/fizzahussain/MoodMeal'},
-{icon:'🎬',name:'MoviesData Manager',cat:['data','algorithms'],tag:'DSA / RECOMMENDATION',desc:'C++ movie data system using AVL trees, hash tables, graph relationships, BFS and recommendation logic.',proof:'I can turn data structures and graph algorithms into a working data product.',stack:['C++','AVL Trees','Hash Tables','Graphs','BFS'],url:'https://github.com/fizzahussain/MoviesData-MANAGER'},
+{icon:'🎬',name:'MoviesData Manager',cat:['data','algorithms'],tag:'DSA / RECOMMENDATION',desc:'C++ movie data system using AVL trees, hash tables, graph relationships, BFS and recommendation logic.',proof:'I can turn data structures and graph algorithms into a working data product.',stack:['C++','AVL Trees','Hash Tables','Graphs','BFS'],url:'https://github.com/fizzahussain/MoviesData-MANAGER',live:'https://movies-data-manager.vercel.app/'},
 {icon:'🚕',name:'RideFlow',cat:['fullstack','algorithms'],tag:'DBMS / BACKEND',desc:'Ride-hailing system with Rider, Driver and Admin workflows, verification, wallets, commissions, complaints, ratings and analytics.',proof:'I understand database-first application design and SQL beyond CRUD.',stack:['Node.js','Express','EJS','MySQL','Stored Procedures','Triggers'],url:'https://github.com/fizzahussain/RideFlow'},
 {icon:'$',name:'Personal Finance Management System',cat:['data','fullstack'],tag:'ANALYTICS / FULL STACK',desc:'Personal-finance analytics across transactions, budgets, reporting, authentication, caching and multiple interfaces.',proof:'I can build analytical workflows across API, dashboard, persistence and reporting layers.',stack:['Python','FastAPI','Streamlit','SQLite','Analytics'],url:'https://github.com/fizzahussain/Personal-Finance-Management-System',demo:'finance'},
-{icon:'♠',name:'UNO 3-Player AI',cat:['data','algorithms'],tag:'SEARCH AI / EXPERIMENTS',desc:'Three-player UNO simulation comparing Minimax, alpha-beta pruning and Expectimax with explicit chance nodes.',proof:'I understand adversarial search, probabilistic decision-making and strategy comparison.',stack:['Python','Minimax','Alpha-Beta','Expectimax'],url:'https://github.com/fizzahussain/UNO-3Player-AIvsHuman'},
+{icon:'♠',name:'UNO 3-Player AI',cat:['data','algorithms'],tag:'SEARCH AI / EXPERIMENTS',desc:'Three-player UNO simulation comparing Minimax, alpha-beta pruning and Expectimax with explicit chance nodes.',proof:'I understand adversarial search, probabilistic decision-making and strategy comparison.',stack:['Python','Minimax','Alpha-Beta','Expectimax'],url:'https://github.com/fizzahussain/UNO-3Player-AIvsHuman',live:'https://uno-3-player-a-ivs-human.vercel.app/'},
 {icon:'⇄',name:'Parallel CSV Data Processing Pipeline',cat:['systems','algorithms'],tag:'OPERATING SYSTEMS / CONCURRENCY',desc:'Concurrent C++ analytics using processes, pthreads, FIFOs, shared memory, semaphores, mutexes and signals.',proof:'I can reason about process boundaries, synchronization, IPC and lifecycle management.',stack:['C++','POSIX','pthreads','FIFO','Shared Memory','Semaphores'],url:'https://github.com/fizzahussain/Parallel-CSV-Data-Processing-Pipeline'},
 {icon:'🚖',name:'Rush Hour // C++',cat:['systems','algorithms'],tag:'OOP / GRAPHICS / GAME SYSTEMS',desc:'Graphical driving game with Taxi and Delivery roles, dynamic traffic, fuel, DFS reachability and leaderboards.',proof:'I can design stateful OOP systems, event loops, game logic and graph traversal in C++.',stack:['C++','OpenGL','SDL2','OOP','DFS'],url:'https://github.com/fizzahussain/RushHour-game'},
 {icon:'ASM',name:'Rush Hour // x86 Assembly',cat:['lowlevel','systems'],tag:'LOW LEVEL / ASSEMBLY',desc:'Console taxi game in x86 Assembly with traffic, passengers, fuel, persistence, leaderboard and audio.',proof:'I am comfortable reasoning below high-level abstractions about procedures, memory, registers and OS-facing APIs.',stack:['x86 Assembly','MASM','Irvine32','WinMM'],url:'https://github.com/fizzahussain/RUSHHOUR_Assembly'},
 {icon:'W',name:'Word Shooter',cat:['systems','algorithms'],tag:'C++ / OPENGL',desc:'Timed word game combining projectile mechanics, collision handling, dictionary-based word detection and search.',proof:'I can combine graphics, input, game state and algorithmic lookup in C++.',stack:['C++','OpenGL','FreeGLUT','SDL2','Binary Search'],url:'https://github.com/fizzahussain/Wordshooter-game'},
 {icon:'▤',name:'CamCorder Website',cat:['ui','fullstack'],tag:'UI / FRONTEND',desc:'Multi-page retro camera e-commerce interface with catalogues, forms, cart/checkout UI and media-rich presentation.',proof:'I care about visual hierarchy and interface structure in addition to backend and systems work.',stack:['HTML','CSS','Bootstrap','Responsive UI'],url:'https://github.com/fizzahussain/CamCorder_website'}
 ];
-let activeProject=projects[0], filter='all';
-function renderProjects(){const list=projects.filter(p=>filter==='all'||p.cat.includes(filter));qs('#questList').innerHTML=list.map((p,i)=>`<div class="quest-item ${p===activeProject?'active':''}" data-name="${p.name}"><span>${p.icon}</span><div><b>${p.name}</b><small>${p.tag}</small></div><small>${String(i+1).padStart(2,'0')}</small></div>`).join('');qsa('.quest-item').forEach(el=>el.onclick=()=>{activeProject=projects.find(p=>p.name===el.dataset.name);renderProjects();renderPreview()});if(!list.includes(activeProject))activeProject=list[0];renderPreview()}
-function renderPreview(){const p=activeProject;if(!p)return;qs('#questPreview').innerHTML=`<span class="preview-tag">${p.tag}</span><h3>${p.name}</h3><p class="preview-desc">${p.desc}</p><div class="proof-box"><span>WHY THIS QUEST MATTERS</span><b>${p.proof}</b></div><div class="chip-row">${p.stack.map(s=>`<span>${s}</span>`).join('')}</div><div class="preview-actions">${p.demo?`<button class="pixel-cta bluebtn quest-demo" data-demo="${p.demo}">▶ WATCH DEMO</button>`:''}<a class="pixel-cta yellow" href="${p.url}" target="_blank" rel="noreferrer">OPEN REPOSITORY ↗</a></div>`;const demoButton=qs('.quest-demo');if(demoButton)demoButton.onclick=()=>openDemo(demoButton.dataset.demo)}
-qsa('#questFilters button').forEach(b=>b.onclick=()=>{qsa('#questFilters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');filter=b.dataset.filter;activeProject=projects.find(p=>filter==='all'||p.cat.includes(filter));renderProjects()});renderProjects();
+let activeProject=projects[0], filter='all', projectQuery='';
+function visibleProjects(){
+  const q=projectQuery.trim().toLowerCase();
+  return projects.filter(p=>(filter==='all'||p.cat.includes(filter))&&(!q||`${p.name} ${p.tag} ${p.stack.join(' ')}`.toLowerCase().includes(q)));
+}
+function renderProjects(){
+  const list=visibleProjects();
+  if(!list.includes(activeProject)) activeProject=list[0]||projects[0];
+  qs('#questCount').textContent=`${String(list.length).padStart(2,'0')} / ${String(projects.length).padStart(2,'0')} PROJECTS LOADED`;
+  qs('#questList').innerHTML=list.length?list.map(p=>{
+    const globalIndex=projects.indexOf(p)+1;
+    return `<button class="quest-item ${p===activeProject?'active':''}" data-name="${p.name}"><span class="quest-id">Q${String(globalIndex).padStart(2,'0')}</span><span class="quest-icon">${p.icon}</span><div><b>${p.name}</b><small>${p.tag}</small></div><span class="quest-arrow">›</span></button>`;
+  }).join(''):`<div class="quest-empty"><b>NO QUESTS FOUND</b><span>Try another filter or search term.</span></div>`;
+  qsa('.quest-item').forEach(el=>el.onclick=()=>{activeProject=projects.find(p=>p.name===el.dataset.name)||projects[0];renderProjects();tone(620,.035)});
+  renderPreview();
+}
+function renderPreview(){
+  const p=activeProject;if(!p)return;
+  const liveNotice=p.live?`<div class="demo-disclaimer"><b>LIVE DEMO NOTICE</b><p><strong>Disclaimer:</strong> Live demos are adapted web versions created for demonstration and deployment purposes and may differ from the original project implementation.</p></div>`:'';
+  qs('#questPreview').innerHTML=`<div class="preview-heading"><span class="preview-tag">${p.tag}</span><span class="preview-id">QUEST ${String(projects.indexOf(p)+1).padStart(2,'0')} / ${String(projects.length).padStart(2,'0')}</span></div><h3>${p.name}</h3><p class="preview-desc">${p.desc}</p><div class="proof-box"><span>WHY THIS QUEST MATTERS</span><b>${p.proof}</b></div><div class="chip-row">${p.stack.map(s=>`<span>${s}</span>`).join('')}</div><div class="preview-actions">${p.demo?`<button class="pixel-cta bluebtn quest-demo" data-demo="${p.demo}">▶ WATCH DEMO</button>`:''}${p.live?`<a class="pixel-cta livebtn" href="${p.live}" target="_blank" rel="noreferrer">▶ OPEN LIVE DEMO ↗</a>`:''}<a class="pixel-cta yellow" href="${p.url}" target="_blank" rel="noreferrer">READ GITHUB README ↗</a></div>${liveNotice}<div class="readme-note"><b>TECHNICAL DETAILS</b><p>For architecture, implementation notes, setup, limitations, algorithms, and deeper project context, open the GitHub README.</p></div>`;
+  const demoButton=qs('.quest-demo');if(demoButton)demoButton.onclick=()=>openDemo(demoButton.dataset.demo);
+}
+qsa('#questFilters button').forEach(b=>b.onclick=()=>{qsa('#questFilters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');filter=b.dataset.filter;renderProjects()});
+const projectSearch=qs('#projectSearch');if(projectSearch)projectSearch.addEventListener('input',()=>{projectQuery=projectSearch.value;renderProjects()});
+renderProjects();
 const skills={AI:[['RAG','RAG Assistant · Revival Lab'],['Ollama','RAG Assistant'],['pgvector','RAG Assistant'],['HNSW','RAG Assistant'],['Tesseract OCR','RAG Assistant'],['faster-whisper','RAG Assistant'],['LangChain','Revival Lab'],['Gemini API','MoodMeal'],['Search AI','UNO AI']],DATA:[['Python','analysis + ML + backend'],['Pandas','EDA + analytics'],['NumPy','numerical work'],['Matplotlib','visualization'],['Seaborn','EDA'],['scikit-learn','ML workflows'],['Advanced Statistics','current course'],['Data Warehousing','current course'],['Business Intelligence','current course']],BACKEND:[['FastAPI','RAG · Finance'],['Node.js','MoodMeal · RideFlow'],['Express','MoodMeal · RideFlow'],['PostgreSQL','RAG'],['MySQL','MoodMeal · RideFlow'],['SQLite','Finance'],['SQLAlchemy','RAG'],['Alembic','RAG'],['REST APIs','multiple projects']],SYSTEMS:[['C++','games · DSA · OS'],['POSIX IPC','Parallel CSV'],['pthreads','Parallel CSV'],['Shared Memory','Parallel CSV'],['Semaphores','Parallel CSV'],['OpenGL','Rush Hour · Word Shooter'],['SDL2','games'],['x86 Assembly','Rush Hour Assembly']],CREATIVE:[['UI / UX','interfaces + design'],['Graphic Design','creative roles'],['Branding','creative work'],['Painting','personal practice'],['Pottery','personal practice'],['Visual Communication','design + marketing'],['Technical Writing','current course']]};
 function renderSkills(key){qs('#skillNodes').innerHTML=skills[key].map((x,i)=>`<div class="skill-node"><span>${String(i+1).padStart(2,'0')}</span><b>${x[0]}</b><small>${x[1]}</small></div>`).join('')};qsa('#skillTabs button').forEach(b=>b.onclick=()=>{qsa('#skillTabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderSkills(b.dataset.skill)});renderSkills('AI');
 const art=[
@@ -48,11 +69,7 @@ const art=[
 ['Desert caravan','Painting with metallic detail','Soft dunes, gold camels and a tiny traveler crossing the frame.','desert-caravan','painting'],
 ['Floral watercolor','Watercolor','Loose pink and orange flowers, green leaves, splashes, and water doing most of the talking.','floral-watercolor','painting'],
 ['Dervish study','Painting','A moving figure built from cool blue-gray layers and one sharp red accent.','dervish-study','painting'],
-['Calligraphy & branches','Painting','White calligraphic movement across warm branches. Kept as its own file because the studio-wall crop never did it justice.','calligraphy-branches','painting'],
-['Wall archive: flame study','Archive crop','A fire-toned wall piece recovered from the studio-wall photo.','wall-flame-study','painting'],
-['Wall archive: blue hands','Archive crop','Blue hands, warm sleeves, and graphic stripes. Another wall piece pulled out of the larger archive shot.','wall-blue-hands','painting'],
-['Wall archive: jazz study','Archive crop','A dark little jazz study from the wall archive.','wall-jazz-study','painting'],
-['Wall archive: flower doodles','Archive crop','A black field of loose flower marks and color, cropped from the studio wall.','wall-flower-doodles','painting'],
+['Calligraphy with pink florals','Acrylic / textured calligraphy','Arabic calligraphy framed by raised pink blossoms, green leaves and metallic branches. This is the real standalone piece, photographed as a finished canvas.','calligraphy-branches','painting'],
 ['Tiny landscape','Mini canvas','A tiny horizon made during a painting session, small enough to hold in one hand.','mini-landscape','mini'],
 ['Studio wall','Studio archive','Pieces living together on the wall instead of pretending they were made in isolation.','studio-wall','studio'],
 ['2:02 AM','Late-night studio','Palette, brushes, paint tubes and a rabbit study. Side quests do not respect normal hours.','late-night-palette','studio'],
@@ -94,8 +111,131 @@ function closeDemo(){const overlay=qs('#demoOverlay'),video=qs('#demoVideo');vid
 qs('#openRagDemo').onclick=()=>openDemo('rag');
 qs('#closeDemo').onclick=closeDemo;
 qs('#demoOverlay').onclick=e=>{if(e.target===e.currentTarget)closeDemo()};
-const career=[['2026','Technical / Regulatory Affairs Intern','Jazz Pakistan / Jazz World'],['2026','Data Science & AI Intern','Beta Codes Pakistan'],['2026 to Present','Founder & Lead Tutor','MindCraft Tuition'],['2025 to Present','STEM Tutor','My Tutor Source'],['2025','Web Development Trainee','MicroMerger'],['2024','Data Analytics Intern','Sahl Pakistan'],['2025','Lead Graphics Designer','Nerdy Labs'],['2025','Tech & Creatives Intern','Unmute Pakistan'],['2025','Introduction to Technology Apprenticeship Simulation','Accenture UK']];qs('#careerLog').innerHTML=career.map(x=>`<div class="career-entry"><span>${x[0]}</span><div><b>${x[1]}</b><small>${x[2]}</small></div></div>`).join('');
+const career=[
+['2026','Technical / Regulatory Affairs Intern','Jazz Pakistan / Jazz World','TECH / REGULATORY'],
+['2026','Data Science & AI Intern','Beta Codes Pakistan','AI / DATA'],
+['2026 to Present','Founder & Lead Tutor','MindCraft Tuition','TEACHING / LEADERSHIP'],
+['2025 to Present','STEM Tutor','My Tutor Source','TEACHING'],
+['2025','Web Development Trainee','MicroMerger','SOFTWARE'],
+['2024','Data Analytics Intern','Sahl Pakistan','DATA'],
+['2025','Lead Graphics Designer','Nerdy Labs','DESIGN'],
+['2025','Tech & Creatives Intern','Unmute Pakistan','TECH / CREATIVE'],
+['2025','Introduction to Technology Apprenticeship Simulation','Accenture UK','TECHNOLOGY']
+];
+qs('#careerLog').innerHTML=career.map((x,i)=>`<div class="career-entry"><span class="career-year">${x[0]}</span><div class="career-role"><b>${x[1]}</b><small>${x[2]}</small></div><span class="career-track">${x[3]}</span></div>`).join('');
 function openMap(){qs('#mapPanel').classList.remove('hidden')}qs('#openMap').onclick=openMap;qs('#railMap').onclick=openMap;qs('#closeMap').onclick=()=>qs('#mapPanel').classList.add('hidden');qsa('.map-grid a').forEach(a=>a.onclick=()=>qs('#mapPanel').classList.add('hidden'));
 let achTimer;function achievement(text){clearTimeout(achTimer);qs('#achievementText').textContent=text;qs('#achievement').classList.remove('hidden');achTimer=setTimeout(()=>qs('#achievement').classList.add('hidden'),2400)}
 const sections=qsa('.stage');let seen=new Set();const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){const i=sections.indexOf(e.target);qs('#xpFill').style.width=`${Math.min(100,((i+1)/sections.length)*100)}%`;qs('#xpText').textContent=`XP ${String((i+1)*100).padStart(3,'0')} / ${sections.length*100}`;if(!seen.has(e.target.id)&&seen.size){achievement(`${e.target.id.toUpperCase()} DISCOVERED`)}seen.add(e.target.id)}}),{threshold:.4});sections.forEach(s=>obs.observe(s));
 window.addEventListener('keydown',e=>{if(e.key==='Escape'&&!qs('#demoOverlay').classList.contains('hidden')){closeDemo();return}if(e.key.toLowerCase()==='m')openMap();if(e.key.toLowerCase()==='a')qs('#about').scrollIntoView({behavior:'smooth'});if(e.key.toLowerCase()==='p')qs('#projects').scrollIntoView({behavior:'smooth'});const n=+e.key;if(n>=1&&n<=8)sections[n-1]?.scrollIntoView({behavior:'smooth'})});
+
+// V10 // playable avatar world + pixel motion
+(()=>{
+  const world=document.querySelector('#avatarWorld');
+  const avatar=document.querySelector('#playerAvatar');
+  if(!world||!avatar)return;
+
+  const state={x:50,y:58,tx:50,ty:58,keys:new Set(),walking:false,lastDir:1,near:null};
+  const speed=22;
+  let last=performance.now();
+
+  const portals=[...world.querySelectorAll('.world-portal')];
+  portals.forEach(p=>{
+    if(p.dataset.warp){
+      p.addEventListener('click',()=>document.querySelector(p.dataset.warp)?.scrollIntoView({behavior:'smooth'}));
+    }
+  });
+
+  function clamp(v,min,max){return Math.max(min,Math.min(max,v))}
+  function place(){
+    avatar.style.left=`${state.x}%`;
+    avatar.style.top=`${state.y}%`;
+    avatar.classList.toggle('walking',state.walking);
+    avatar.classList.toggle('flip',state.lastDir<0);
+  }
+
+  function nearestPortal(){
+    const ar=avatar.getBoundingClientRect();
+    const ax=ar.left+ar.width/2, ay=ar.top+ar.height/2;
+    let best=null,bestD=Infinity;
+    portals.forEach(p=>{
+      const r=p.getBoundingClientRect();
+      const px=r.left+r.width/2, py=r.top+r.height/2;
+      const d=Math.hypot(px-ax,py-ay);
+      if(d<bestD){bestD=d;best=p}
+    });
+    state.near=bestD<92?best:null;
+    portals.forEach(p=>p.classList.toggle('near-player',p===state.near));
+    const hint=world.querySelector('.world-hint');
+    if(hint){
+      hint.innerHTML=state.near?`<b>ENTER</b> OPEN ${state.near.querySelector('small')?.textContent||'PORTAL'} <span>•</span> WASD / ARROWS`:`<b>MOVE</b> WASD / ARROWS / CLICK <span>•</span> WALK INTO A PORTAL`;
+    }
+  }
+
+  function activateNearest(){
+    const p=state.near;
+    if(!p)return;
+    if(p.dataset.warp){
+      achievement(`${p.querySelector('small')?.textContent||'PORTAL'} ENTERED`);
+      document.querySelector(p.dataset.warp)?.scrollIntoView({behavior:'smooth'});
+    }else if(p.href){
+      window.open(p.href,'_blank','noopener');
+    }
+  }
+
+  function frame(now){
+    const dt=Math.min(.04,(now-last)/1000);last=now;
+    let dx=0,dy=0;
+    if(state.keys.has('arrowleft')||state.keys.has('a'))dx-=1;
+    if(state.keys.has('arrowright')||state.keys.has('d'))dx+=1;
+    if(state.keys.has('arrowup')||state.keys.has('w'))dy-=1;
+    if(state.keys.has('arrowdown')||state.keys.has('s'))dy+=1;
+    const keyMoving=dx||dy;
+    if(keyMoving){
+      const len=Math.hypot(dx,dy)||1;dx/=len;dy/=len;
+      state.x=clamp(state.x+dx*speed*dt,7,92);
+      state.y=clamp(state.y+dy*speed*dt,22,79);
+      state.tx=state.x;state.ty=state.y;
+      if(dx)state.lastDir=Math.sign(dx);
+      state.walking=true;
+    }else{
+      const ddx=state.tx-state.x, ddy=state.ty-state.y;
+      const dist=Math.hypot(ddx,ddy);
+      if(dist>.3){
+        state.x+=ddx*Math.min(1,dt*5.2);
+        state.y+=ddy*Math.min(1,dt*5.2);
+        if(Math.abs(ddx)>.2)state.lastDir=Math.sign(ddx);
+        state.walking=true;
+      }else state.walking=false;
+    }
+    place();nearestPortal();requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  world.addEventListener('pointerdown',e=>{
+    if(e.target.closest('.world-portal'))return;
+    const r=world.getBoundingClientRect();
+    state.tx=clamp(((e.clientX-r.left)/r.width)*100,7,92);
+    state.ty=clamp(((e.clientY-r.top)/r.height)*100,22,79);
+    world.focus();
+  });
+  world.addEventListener('keydown',e=>{
+    const k=e.key.toLowerCase();
+    if(['arrowleft','arrowright','arrowup','arrowdown','w','a','s','d'].includes(k)){e.preventDefault();state.keys.add(k)}
+    if(k==='enter'){e.preventDefault();activateNearest()}
+  });
+  world.addEventListener('keyup',e=>state.keys.delete(e.key.toLowerCase()));
+  world.addEventListener('blur',()=>state.keys.clear());
+
+  // Tiny pixel trail. Deliberately sparse so it feels game-like, not glittery.
+  let lastTrail=0;
+  window.addEventListener('pointermove',e=>{
+    if(innerWidth<700||e.timeStamp-lastTrail<55)return;lastTrail=e.timeStamp;
+    const dot=document.createElement('i');dot.className='cursor-pixel';dot.style.left=`${e.clientX+5}px`;dot.style.top=`${e.clientY+7}px`;document.body.appendChild(dot);setTimeout(()=>dot.remove(),620);
+  },{passive:true});
+
+  // Motion state for section entrances
+  const motionObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+    if(entry.isIntersecting)entry.target.classList.add('stage-live');
+  }),{threshold:.18});
+  document.querySelectorAll('.stage').forEach(el=>motionObserver.observe(el));
+})();

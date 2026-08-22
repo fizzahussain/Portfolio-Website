@@ -74,10 +74,6 @@ Then open:
 http://localhost:8000
 ```
 
-## ✦ Deploy to Vercel
-
-Import the repository into Vercel and deploy it as a static site. No framework or build command is required.
-
 ## ✦ Tech used
 
 **HTML · CSS · JavaScript · Responsive Design · GitHub · Vercel**

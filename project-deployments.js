@@ -1,5 +1,4 @@
-/* Project deployment links / showcase labels */
-(function () {
+(() => {
   const deployments = {
     'MoviesData Manager': 'https://movies-data-manager.vercel.app/',
     'UNO 3-Player AI': 'https://uno-3-player-a-ivs-human.vercel.app/',
@@ -7,62 +6,13 @@
     'PUBG Player Performance & Behavioral Analysis': 'https://pubg-player-performance-behavioral.vercel.app/',
     'Personal Finance Management System': 'https://personal-finance-management-system-lyart.vercel.app/'
   };
-
-  const liveNames = new Set(Object.keys(deployments));
-
-  function addDeploymentUI() {
-    const preview = document.querySelector('#questPreview');
-    if (!preview || !window.projects) return;
-
-    const project = window.activeProject;
-    if (!project) return;
-
-    const existing = preview.querySelector('.deployment-status');
-    if (existing) existing.remove();
-
-    const actions = preview.querySelector('.preview-actions');
-    if (!actions) return;
-
-    const status = document.createElement('div');
-    status.className = 'deployment-status';
-
-    if (liveNames.has(project.name)) {
-      status.innerHTML = `
-        <span class="deployment-live">● LIVE DEPLOYMENT</span>
-        <a class="pixel-cta lime" href="${deployments[project.name]}" target="_blank" rel="noreferrer">OPEN LIVE PROJECT ↗</a>
-      `;
-    } else {
-      status.innerHTML = `
-        <span class="deployment-showcase">◆ SHOWCASE / UI PREVIEW</span>
-        <small>This project is presented here as a project showcase. No live web deployment is currently available.</small>
-      `;
-    }
-
-    actions.prepend(status);
+  const style = document.createElement('style');
+  style.textContent = `.quest-status{display:inline-block!important;font-family:'VT323',monospace!important;font-size:.85rem!important;letter-spacing:.06em!important;margin-left:auto!important;padding:2px 6px!important;border:1px solid currentColor!important}.quest-status.is-live{color:#8cff00!important}.quest-status.is-showcase{color:#777!important}.deployment-status{display:flex;flex-direction:column;gap:10px;margin:18px 0 4px;padding:12px;border:1px dashed #555;background:rgba(0,0,0,.05)}.deployment-live,.deployment-showcase{font-family:'Press Start 2P',monospace;font-size:.62rem;letter-spacing:.04em}.deployment-live{color:#55ff00}.deployment-showcase{color:#777}.deployment-status small{font-family:'VT323',monospace;font-size:1rem;line-height:1.1;color:#666}.deployment-status .pixel-cta{width:max-content!important}`;
+  document.head.appendChild(style);
+  function refresh(){
+    document.querySelectorAll('.quest-item').forEach(item=>{const name=item.dataset.name;let status=item.querySelector('.quest-status');if(!status){status=document.createElement('small');item.appendChild(status)}status.className=`quest-status ${deployments[name]?'is-live':'is-showcase'}`;status.textContent=deployments[name]?'LIVE':'SHOWCASE'});
+    const preview=document.querySelector('#questPreview');if(!preview)return;const title=preview.querySelector('h3'),actions=preview.querySelector('.preview-actions');if(!title||!actions)return;const old=preview.querySelector('.deployment-status');if(old)old.remove();const name=title.textContent.trim(),box=document.createElement('div');box.className='deployment-status';
+    if(deployments[name])box.innerHTML=`<span class="deployment-live">● LIVE DEPLOYMENT</span><a class="pixel-cta lime" href="${deployments[name]}" target="_blank" rel="noreferrer">OPEN LIVE PROJECT ↗</a>`;else box.innerHTML=`<span class="deployment-showcase">◆ PROJECT SHOWCASE / UI PREVIEW</span><small>This project is presented as a project showcase. It does not currently have a live web deployment.</small>`;actions.parentNode.insertBefore(box,actions);
   }
-
-  function markQuestItems() {
-    document.querySelectorAll('.quest-item').forEach(item => {
-      const name = item.dataset.name;
-      const old = item.querySelector('.quest-status');
-      if (old) old.remove();
-
-      const status = document.createElement('small');
-      status.className = 'quest-status ' + (liveNames.has(name) ? 'is-live' : 'is-showcase');
-      status.textContent = liveNames.has(name) ? 'LIVE' : 'SHOWCASE';
-      item.appendChild(status);
-    });
-  }
-
-  function refresh() {
-    markQuestItems();
-    addDeploymentUI();
-  }
-
-  const observer = new MutationObserver(refresh);
-  const target = document.querySelector('#questList');
-  if (target) observer.observe(target, { childList: true, subtree: true });
-
-  document.addEventListener('click', () => setTimeout(refresh, 0));
-  setTimeout(refresh, 300);
+  const list=document.querySelector('#questList'),preview=document.querySelector('#questPreview');const observer=new MutationObserver(()=>setTimeout(refresh,0));if(list)observer.observe(list,{childList:true,subtree:true});if(preview)observer.observe(preview,{childList:true,subtree:true});setTimeout(refresh,250);
 })();

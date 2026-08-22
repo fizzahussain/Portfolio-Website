@@ -1,21 +1,68 @@
-# FIZZA//SAVE FILE — v7
+# FIZZA//SAVE FILE — Portfolio
 
-A handcrafted static portfolio for Fizza Hussain, designed as a hybrid of an old operating system, a game save screen, an AI lab, and a personal creative archive.
+A handcrafted static portfolio for **Fizza Hussain**, designed as a hybrid of an old operating system, a game save screen, an AI lab, and a personal creative archive.
 
-## What changed in v7
+## ✦ Portfolio
 
-- Replaced the generic art-wall player image with real portrait photography
-- Added a 4-photo interactive player camera
-- Added a personal camera roll to the About section
-- Rewrote the hero copy to feel more personal and less portfolio-template-like
-- Made floral watercolor, calligraphy/branches, and birds/blossoms explicitly featured instead of buried in thumbnails
-- Added art filters for paintings, mini canvases, studio archive, and clay/baking
-- Improved thumbnail cropping and artwork presentation
-- Preserved the corrected pottery/baking distinction
-- Kept all Semester 5 coursework, both new Data Science projects, and the existing AI/software/systems work
-- Refined the game/OS visual language with more deliberate windows, HUD details, scan UI, photo controls, and physical-card styling
+The website brings together Fizza's **AI, Data Science, software engineering, systems, algorithms, UI work, leadership, and creative work** in one interactive experience.
 
-## Run locally
+### Featured live projects
+
+The portfolio now includes direct **LIVE PROJECT** buttons for projects with web deployments:
+
+- **MoviesData Manager** — C++ data structures and recommendation system
+- **UNO 3-Player AI** — Minimax, Alpha-Beta Pruning and Expectimax
+- **Islamabad House Price Prediction** — machine-learning regression project
+- **PUBG Player Performance & Behavioral Analysis** — data analysis and behavioral insights
+- **Personal Finance Management System** — FastAPI + Streamlit finance analytics system
+
+Projects that are not deployed as web applications are clearly marked as **PROJECT SHOWCASE / UI PREVIEW** rather than being presented as live websites.
+
+## ✦ Project areas
+
+- **AI / Data:** RAG Document Assistant, ML, analytics, retrieval, AI experimentation
+- **Full Stack:** FastAPI, Node.js, Express, databases and application workflows
+- **Algorithms:** AVL trees, graphs, BFS, Minimax, Alpha-Beta, Expectimax and search
+- **Systems:** C++, POSIX processes, pthreads, IPC, shared memory and synchronization
+- **Low Level:** x86 Assembly, MASM and OS-facing APIs
+- **UI / Web:** HTML, CSS, Bootstrap and interactive interfaces
+
+## ✦ Creative archive
+
+The portfolio also includes an interactive personal archive featuring:
+
+- Acrylic and watercolor paintings
+- Mini canvases
+- Studio archive pieces
+- Handmade pottery and clay work
+- Baking / edible sculpture
+- Creative experiments and visual studies
+
+## ✦ Interactive features
+
+- Retro game / old-OS interface
+- Interactive AI pipeline
+- Project Quest Map with category filters
+- Live deployment buttons and repository links
+- Project showcase labels for non-deployed work
+- Skill tree with tools mapped to projects
+- Semester 5 courseware section
+- Interactive art browser and filters
+- Career and leadership save history
+- RAG Document Assistant demo player
+- Personal Finance demo player
+- Keyboard shortcuts and interactive HUD
+
+## ✦ Demo videos
+
+Two walkthroughs are bundled into the portfolio and open through the retro media player:
+
+- `media/demos/rag-document-assistant-demo.mp4` — RAG Document Assistant
+- `media/demos/personal-finance-demo.mp4` — Personal Finance / FinanceFlow
+
+## ✦ Run locally
+
+The portfolio is a plain HTML/CSS/JavaScript site with no build dependencies.
 
 ```bash
 python -m http.server 8000
@@ -27,31 +74,21 @@ Then open:
 http://localhost:8000
 ```
 
-## Deploy to Vercel
+## ✦ Deploy to Vercel
 
-This site is plain HTML/CSS/JavaScript with no dependencies.
+Import the repository into Vercel and deploy it as a static site. No framework or build command is required.
 
-Import the folder/repository into Vercel and deploy it as a static site.
+## ✦ Tech used
 
+**HTML · CSS · JavaScript · Responsive Design · GitHub · Vercel**
 
-## Demo videos
+## ✦ About Fizza
 
-Two real walkthroughs are bundled into the portfolio and open in the retro media player:
+**Fizza Hussain** is a BS Data Science student at FAST-NUCES Islamabad, building toward work in **AI, Machine Learning, Data Science, intelligent systems, and software engineering** while keeping a serious creative side quest alive.
 
-- `media/demos/rag-document-assistant-demo.mp4` — RAG Document Assistant (~5:50)
-- `media/demos/personal-finance-demo.mp4` — Personal Finance / FinanceFlow (~3:20)
+Expected graduation: **2028**.
 
-Poster frames are stored alongside them and the demos are accessible from the RAG boss panel and project Quest Map.
+---
 
-
-## V9 refinement
-
-- player camera now uses one curated portrait
-- a second portrait appears only at the ending, not as a camera roll
-- GitHub is available from the first screen
-- expected graduation 2028 is shown in the player panel
-- Personal Finance now exposes its demo button
-- Data Analytics internship corrected to 2024
-- expanded art archive with deer mini canvas, wall-detail paintings, cow clay figure, and existing painting/craft work
-- visible em dashes removed from copy where possible
-- section palette diversified while preserving the retro game / old-OS visual language
+> Main quest: **make intelligence useful.**  
+> Side quests: **everything else.**

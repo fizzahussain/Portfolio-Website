@@ -1,241 +1,68 @@
-const qs=(s,p=document)=>p.querySelector(s), qsa=(s,p=document)=>[...p.querySelectorAll(s)];
-const boot=qs('#boot'), app=qs('#app');
-function enter(target='#home'){boot.style.display='none';app.classList.remove('locked');setTimeout(()=>qs(target)?.scrollIntoView({behavior:'smooth'}),120);achievement('SAVE FILE LOADED');}
-qs('#startGame').onclick=()=>enter('#home');qs('#quickStart').onclick=()=>enter('#ai');
-let sound=false;qs('#soundToggle').onclick=()=>{sound=!sound;qs('#soundToggle').textContent=`SFX ${sound?'ON':'OFF'}`;achievement(sound?'SFX ENABLED':'SFX MUTED')};
-function tone(freq=520,dur=.06){if(!sound)return;const A=window.AudioContext||window.webkitAudioContext;const a=new A(),o=a.createOscillator(),g=a.createGain();o.type='square';o.frequency.value=freq;g.gain.value=.025;o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+dur)}
-document.addEventListener('click',e=>{if(e.target.closest('button,.pixel-cta,.quest-item,.art-thumb'))tone(520,.045)});
-function tick(){qs('#clock').textContent=new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}tick();setInterval(tick,30000);
+const $=(s,p=document)=>p.querySelector(s);const $$=(s,p=document)=>[...p.querySelectorAll(s)];
+const site=$('#site'),title=$('#titleScreen');let avatarMode='glasses',sound=false,lastY=window.scrollY,walkTimer;
+const avatarSrc={glasses:'media/ui/fizza-glasses.jpg',casual:'media/ui/fizza-no-glasses.jpg'};
+$$('.player-card').forEach(card=>card.addEventListener('click',()=>{$$('.player-card').forEach(c=>{c.classList.remove('active');c.setAttribute('aria-pressed','false')});card.classList.add('active');card.setAttribute('aria-pressed','true');avatarMode=card.dataset.avatar;tone(660,.04)}));
+function enter(mode='story'){title.style.display='none';site.classList.remove('locked');document.body.dataset.mode=mode;$('#guideAvatar').src=avatarSrc[avatarMode];setTimeout(()=>$('#about').scrollIntoView({behavior:'smooth'}),120);achievement(mode==='quick'?'QUICK EXPLORE READY':'STORY MODE STARTED')}
+$('#newGame').onclick=()=>enter('story');$('#quickExplore').onclick=()=>{enter('quick');setTimeout(openMap,240)};
+function tone(freq=520,dur=.05){if(!sound)return;const A=window.AudioContext||window.webkitAudioContext;const a=new A(),o=a.createOscillator(),g=a.createGain();o.type='square';o.frequency.value=freq;g.gain.value=.025;o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+dur)}
+$('#soundButton').onclick=()=>{sound=!sound;$('#soundButton').textContent=`SFX ${sound?'ON':'OFF'}`;achievement(sound?'SFX ENABLED':'SFX MUTED');tone(740,.07)};
+document.addEventListener('click',e=>{if(e.target.closest('button,a,.art-frame,.project-row'))tone(530,.035)});
+function tick(){$('#clock').textContent=new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}tick();setInterval(tick,30000);
+function openMap(){$('#mapPanel').classList.remove('hidden');tone(430,.05)}$('#mapButton').onclick=openMap;$('#closeMap').onclick=()=>$('#mapPanel').classList.add('hidden');$$('.map-grid a').forEach(a=>a.onclick=()=>$('#mapPanel').classList.add('hidden'));
+let achTimer;function achievement(text){clearTimeout(achTimer);$('#achievementText').textContent=text;$('#achievement').classList.remove('hidden');achTimer=setTimeout(()=>$('#achievement').classList.add('hidden'),2200)}
 const aiSteps=[
-['INGEST_01','Messy inputs are where the real system starts.','Documents, scanned pages, voice and structured files first need to become trustworthy machine-readable inputs.',['PyMuPDF','DOCX','CSV','HTML','JSON'],'[OK] file channels mounted\n[OK] metadata preserved\n[WAIT] understand'],
-['UNDERSTAND_02','Extraction quality changes everything downstream.','Native parsing first; OCR or speech-to-text when the source demands it. A polished answer cannot rescue bad extraction.',['Tesseract OCR','faster-whisper','VAD','CPU/int8'],'[OK] OCR fallback armed\n[OK] STT model cached\n[WAIT] represent'],
-['REPRESENT_03','Context has to survive the chunk boundary.','Chunking, overlap and embeddings decide what meaning remains retrievable after a document is split.',['Chunking','Overlap','nomic-embed-text','Metadata'],'[OK] chunks emitted\n[OK] vectors embedded\n[WAIT] retrieve'],
-['RETRIEVE_04','Find the right evidence fast.','Vector storage and approximate nearest-neighbor search turn embeddings into usable retrieval instead of a very expensive pile of numbers.',['PostgreSQL','pgvector','HNSW','Cosine Similarity'],'[OK] pgvector connected\n[OK] HNSW index online\n[OK] cosine search ready'],
-['GROUND_05','Make the answer earn its confidence.','Retrieved evidence becomes explicit context so generation can stay inspectable, filtered and citation-backed.',['Top-k','Thresholds','Grounding','Citations'],'[OK] context assembled\n[OK] citations attached\n[WAIT] reason'],
-['REASON_06','The LLM is the last layer, not the whole product.','Local generation with Ollama turns grounded context into an answer while the surrounding system handles memory, streaming and user experience.',['Ollama','llama3.2','Memory','SSE Streaming'],'[OK] grounded prompt ready\n[OK] stream open\n[DONE] answer delivered']
+['INGEST_01','Messy inputs are where the real system starts.','Documents, scanned pages, voice, and structured files first need to become trustworthy machine-readable inputs.',['PyMuPDF','DOCX','CSV','HTML','JSON'],'[OK] file channels mounted\n[OK] metadata preserved\n[WAIT] understand'],
+['UNDERSTAND_02','Extraction quality changes everything downstream.','Native parsing first. OCR or speech-to-text when the source demands it. A polished answer cannot rescue bad extraction.',['Tesseract OCR','faster-whisper','VAD','CPU / int8'],'[OK] OCR fallback armed\n[OK] STT model cached\n[WAIT] represent'],
+['REPRESENT_03','Context has to survive the chunk boundary.','Chunking, overlap, metadata, and embeddings decide what meaning remains retrievable after a document is split.',['Chunking','Overlap','nomic-embed-text','Metadata'],'[OK] chunks emitted\n[OK] vectors embedded\n[WAIT] retrieve'],
+['RETRIEVE_04','Find the right evidence fast.','Vector storage and approximate nearest-neighbor search turn embeddings into usable retrieval.',['PostgreSQL','pgvector','HNSW','Cosine Similarity'],'[OK] pgvector connected\n[OK] HNSW index online\n[OK] cosine search ready'],
+['GROUND_05','Make the answer earn its confidence.','Retrieved evidence becomes explicit context so generation can stay inspectable, filtered, and citation-backed.',['Top-k','Thresholds','Grounding','Citations'],'[OK] context assembled\n[OK] citations attached\n[WAIT] reason'],
+['REASON_06','The LLM is the last layer, not the whole product.','Local generation with Ollama turns grounded context into an answer while the surrounding system handles memory, streaming, and user experience.',['Ollama','llama3.2','Memory','SSE Streaming'],'[OK] grounded prompt ready\n[OK] stream open\n[DONE] answer delivered']
 ];
-qsa('#aiPipeline button').forEach(b=>b.onclick=()=>{qsa('#aiPipeline button').forEach(x=>x.classList.remove('active'));b.classList.add('active');const i=+b.dataset.step,d=aiSteps[i];qs('#aiState').textContent=`PROCESS 0${i+1}/06`;qs('#aiCode').textContent=d[0];qs('#aiTitle').textContent=d[1];qs('#aiText').textContent=d[2];qs('#aiTools').innerHTML=d[3].map(x=>`<span>${x}</span>`).join('');qs('#aiLog').textContent=d[4]});qsa('#aiPipeline button')[3].click();
+$$('#aiPipeline button').forEach(btn=>btn.onclick=()=>{const i=+btn.dataset.step,$s=$$('#aiPipeline button');$s.forEach(x=>x.classList.remove('active'));btn.classList.add('active');const d=aiSteps[i];$('#aiCounter').textContent=`0${i+1} / 06`;$('#aiCode').textContent=d[0];$('#aiTitle').textContent=d[1];$('#aiText').textContent=d[2];$('#aiTools').innerHTML=d[3].map(x=>`<span>${x}</span>`).join('');$('#aiLog').textContent=d[4];tone(620,.04)});$$('#aiPipeline button')[3].click();
 const projects=[
-{icon:'▣',name:'RAG Document Assistant',cat:['data','fullstack'],tag:'AI SYSTEMS / FLAGSHIP',desc:'Local-first document intelligence across ingestion, OCR, STT, embeddings, vector retrieval, grounded generation, citations, memory and containerized services.',proof:'I can engineer the complete AI path instead of treating the model call as the whole system.',stack:['Python','FastAPI','Ollama','pgvector','HNSW','Tesseract','faster-whisper','Docker'],url:'https://github.com/fizzahussain/Rag-Document-Assistant',demo:'rag'},
-{icon:'⌂',name:'Islamabad House Price Prediction',cat:['data'],tag:'MACHINE LEARNING / REGRESSION',desc:'A newer data-science project focused on predicting Islamabad house prices from property data.',proof:'I am moving deeper from analytical systems into supervised machine-learning workflows and model evaluation.',stack:['Python','Machine Learning','Regression','EDA'],url:'https://github.com/fizzahussain/Islamabad-House-Price-Prediction',live:'https://islamabad-house-price-prediction.vercel.app/'},
-{icon:'◎',name:'PUBG Player Performance & Behavioral Analysis',cat:['data'],tag:'DATA ANALYSIS / BEHAVIOR',desc:'A newer analysis project focused on player performance and behavioral patterns in PUBG data.',proof:'I can frame raw behavioral data as an analysis problem and turn it into interpretable patterns and visual evidence.',stack:['Python','Data Analysis','Visualization','Behavioral Analysis'],url:'https://github.com/fizzahussain/PUBG-Player-Performance-Behavioral-Analysis',live:'https://pubg-player-performance-behavioral.vercel.app/'},
-{icon:'⌕',name:'Revival Lab',cat:['data'],tag:'FORENSIC RAG / RESEARCH',desc:'Retrieval over a curated archive of forgotten solutions, with evidence-oriented investigation and fallback search.',proof:'I explored semantic retrieval as a research and evidence-navigation problem.',stack:['Python','RAG','ChromaDB','LangChain','OpenAI','Gradio'],url:'https://github.com/fizzahussain/Revival-Lab'},
-{icon:'🍽',name:'MoodMeal',cat:['data','fullstack'],tag:'AI PRODUCT / FULL STACK',desc:'Smart meal planning with pantry tracking, recommendations, expense analytics, expiry awareness and a Gemini-powered assistant.',proof:'I can integrate AI into a real product with users, data, analytics and deployment concerns.',stack:['React','Node.js','Express','MySQL','Gemini API'],url:'https://github.com/fizzahussain/MoodMeal'},
-{icon:'🎬',name:'MoviesData Manager',cat:['data','algorithms'],tag:'DSA / RECOMMENDATION',desc:'C++ movie data system using AVL trees, hash tables, graph relationships, BFS and recommendation logic.',proof:'I can turn data structures and graph algorithms into a working data product.',stack:['C++','AVL Trees','Hash Tables','Graphs','BFS'],url:'https://github.com/fizzahussain/MoviesData-MANAGER',live:'https://movies-data-manager.vercel.app/'},
-{icon:'🚕',name:'RideFlow',cat:['fullstack','algorithms'],tag:'DBMS / BACKEND',desc:'Ride-hailing system with Rider, Driver and Admin workflows, verification, wallets, commissions, complaints, ratings and analytics.',proof:'I understand database-first application design and SQL beyond CRUD.',stack:['Node.js','Express','EJS','MySQL','Stored Procedures','Triggers'],url:'https://github.com/fizzahussain/RideFlow'},
-{icon:'$',name:'Personal Finance Management System',cat:['data','fullstack'],tag:'ANALYTICS / FULL STACK',desc:'Personal-finance analytics across transactions, budgets, reporting, authentication, caching and multiple interfaces.',proof:'I can build analytical workflows across API, dashboard, persistence and reporting layers.',stack:['Python','FastAPI','Streamlit','SQLite','Analytics'],url:'https://github.com/fizzahussain/Personal-Finance-Management-System',demo:'finance'},
-{icon:'♠',name:'UNO 3-Player AI',cat:['data','algorithms'],tag:'SEARCH AI / EXPERIMENTS',desc:'Three-player UNO simulation comparing Minimax, alpha-beta pruning and Expectimax with explicit chance nodes.',proof:'I understand adversarial search, probabilistic decision-making and strategy comparison.',stack:['Python','Minimax','Alpha-Beta','Expectimax'],url:'https://github.com/fizzahussain/UNO-3Player-AIvsHuman',live:'https://uno-3-player-a-ivs-human.vercel.app/'},
-{icon:'⇄',name:'Parallel CSV Data Processing Pipeline',cat:['systems','algorithms'],tag:'OPERATING SYSTEMS / CONCURRENCY',desc:'Concurrent C++ analytics using processes, pthreads, FIFOs, shared memory, semaphores, mutexes and signals.',proof:'I can reason about process boundaries, synchronization, IPC and lifecycle management.',stack:['C++','POSIX','pthreads','FIFO','Shared Memory','Semaphores'],url:'https://github.com/fizzahussain/Parallel-CSV-Data-Processing-Pipeline'},
-{icon:'🚖',name:'Rush Hour // C++',cat:['systems','algorithms'],tag:'OOP / GRAPHICS / GAME SYSTEMS',desc:'Graphical driving game with Taxi and Delivery roles, dynamic traffic, fuel, DFS reachability and leaderboards.',proof:'I can design stateful OOP systems, event loops, game logic and graph traversal in C++.',stack:['C++','OpenGL','SDL2','OOP','DFS'],url:'https://github.com/fizzahussain/RushHour-game'},
-{icon:'ASM',name:'Rush Hour // x86 Assembly',cat:['lowlevel','systems'],tag:'LOW LEVEL / ASSEMBLY',desc:'Console taxi game in x86 Assembly with traffic, passengers, fuel, persistence, leaderboard and audio.',proof:'I am comfortable reasoning below high-level abstractions about procedures, memory, registers and OS-facing APIs.',stack:['x86 Assembly','MASM','Irvine32','WinMM'],url:'https://github.com/fizzahussain/RUSHHOUR_Assembly'},
-{icon:'W',name:'Word Shooter',cat:['systems','algorithms'],tag:'C++ / OPENGL',desc:'Timed word game combining projectile mechanics, collision handling, dictionary-based word detection and search.',proof:'I can combine graphics, input, game state and algorithmic lookup in C++.',stack:['C++','OpenGL','FreeGLUT','SDL2','Binary Search'],url:'https://github.com/fizzahussain/Wordshooter-game'},
-{icon:'▤',name:'CamCorder Website',cat:['ui','fullstack'],tag:'UI / FRONTEND',desc:'Multi-page retro camera e-commerce interface with catalogues, forms, cart/checkout UI and media-rich presentation.',proof:'I care about visual hierarchy and interface structure in addition to backend and systems work.',stack:['HTML','CSS','Bootstrap','Responsive UI'],url:'https://github.com/fizzahussain/CamCorder_website'}
+{icon:'▣',name:'RAG Document Assistant',cats:['data','fullstack'],tag:'AI SYSTEMS / FLAGSHIP',desc:'Local-first document intelligence across ingestion, OCR, STT, embeddings, vector retrieval, grounded generation, citations, memory, authentication, streaming, and Dockerized services.',proof:'This is where I learned to treat AI as a system, not a model call.',stack:['Python','FastAPI','Ollama','pgvector','HNSW','Tesseract','faster-whisper','Docker'],url:'https://github.com/fizzahussain/Rag-Document-Assistant',demo:'rag'},
+{icon:'⌂',name:'Islamabad House Price Prediction',cats:['data'],tag:'MACHINE LEARNING / REGRESSION',desc:'A Data Science project focused on residential property data and house-price prediction in Islamabad.',proof:'A step deeper into supervised learning, model evaluation, and turning features into defensible predictions.',stack:['Python','Machine Learning','Regression','EDA'],url:'https://github.com/fizzahussain/Islamabad-House-Price-Prediction',live:'https://islamabad-house-price-prediction.vercel.app/'},
+{icon:'◎',name:'PUBG Player Performance & Behavioral Analysis',cats:['data'],tag:'DATA ANALYSIS / BEHAVIOR',desc:'A Data Science project exploring player performance and behavioral patterns in PUBG data.',proof:'It pushed me to frame noisy behavior as an analysis problem and communicate patterns with evidence.',stack:['Python','Data Analysis','Visualization','Behavioral Analysis'],url:'https://github.com/fizzahussain/PUBG-Player-Performance-Behavioral-Analysis',live:'https://pubg-player-performance-behavioral.vercel.app/'},
+{icon:'⌕',name:'Revival Lab',cats:['data'],tag:'FORENSIC RAG / RESEARCH',desc:'Retrieval over a curated archive of forgotten solutions, with evidence-oriented investigation and fallback search.',proof:'A different way to think about retrieval: not just relevance, but evidence navigation and research.',stack:['Python','RAG','ChromaDB','LangChain','OpenAI','Gradio'],url:'https://github.com/fizzahussain/Revival-Lab'},
+{icon:'🍽',name:'MoodMeal',cats:['data','fullstack'],tag:'AI PRODUCT / FULL STACK',desc:'Smart meal planning with pantry tracking, recommendations, expense analytics, expiry awareness, and a Gemini-powered assistant.',proof:'AI becomes more interesting when it has to live inside a product with users, data, and trade-offs.',stack:['React','Node.js','Express','MySQL','Gemini API'],url:'https://github.com/fizzahussain/MoodMeal'},
+{icon:'🎬',name:'MoviesData Manager',cats:['data','algorithms'],tag:'DSA / RECOMMENDATION',desc:'C++ movie data system using AVL trees, hash tables, graph relationships, BFS, and recommendation logic.',proof:'A project where classic data structures stopped being textbook diagrams and became product behavior.',stack:['C++','AVL Trees','Hash Tables','Graphs','BFS'],url:'https://github.com/fizzahussain/MoviesData-MANAGER',live:'https://movies-data-manager.vercel.app/'},
+{icon:'🚕',name:'RideFlow',cats:['fullstack','algorithms'],tag:'DBMS / BACKEND',desc:'Ride-hailing system with Rider, Driver, and Admin workflows, verification, wallets, commissions, complaints, ratings, and analytics.',proof:'Database-first application design taught me to think beyond CRUD and into integrity, workflows, and SQL behavior.',stack:['Node.js','Express','EJS','MySQL','Stored Procedures','Triggers'],url:'https://github.com/fizzahussain/RideFlow'},
+{icon:'$',name:'Personal Finance Management System',cats:['data','fullstack'],tag:'ANALYTICS / FULL STACK',desc:'Personal-finance analytics across transactions, budgets, reporting, authentication, caching, and multiple interfaces.',proof:'A full analytical workflow from persistence to API to dashboard to reporting.',stack:['Python','FastAPI','Streamlit','SQLite','Analytics'],url:'https://github.com/fizzahussain/Personal-Finance-Management-System',demo:'finance',live:'https://personal-finance-management-system-lyart.vercel.app/'},
+{icon:'♠',name:'UNO 3-Player AI',cats:['data','algorithms'],tag:'SEARCH AI / EXPERIMENTS',desc:'Three-player UNO simulation comparing Minimax, alpha-beta pruning, and Expectimax with explicit chance nodes.',proof:'A compact playground for adversarial search, uncertainty, and comparing decision strategies.',stack:['Python','Minimax','Alpha-Beta','Expectimax'],url:'https://github.com/fizzahussain/UNO-3Player-AIvsHuman',live:'https://uno-3-player-a-ivs-human.vercel.app/'},
+{icon:'⇄',name:'Parallel CSV Data Processing Pipeline',cats:['systems','algorithms'],tag:'OPERATING SYSTEMS / CONCURRENCY',desc:'Concurrent C++ analytics using processes, pthreads, FIFOs, shared memory, semaphores, mutexes, and signals.',proof:'The project that forced me to reason about process boundaries, synchronization, IPC, and clean shutdown.',stack:['C++','POSIX','pthreads','FIFO','Shared Memory','Semaphores'],url:'https://github.com/fizzahussain/Parallel-CSV-Data-Processing-Pipeline'},
+{icon:'🚖',name:'Rush Hour // C++',cats:['systems','algorithms'],tag:'OOP / GRAPHICS / GAME SYSTEMS',desc:'Graphical driving game with Taxi and Delivery roles, dynamic traffic, fuel, DFS reachability, and leaderboards.',proof:'Stateful OOP design, event loops, game logic, persistence, and graph traversal in one C++ build.',stack:['C++','OpenGL','SDL2','OOP','DFS'],url:'https://github.com/fizzahussain/RushHour-game'},
+{icon:'ASM',name:'Rush Hour // x86 Assembly',cats:['lowlevel','systems'],tag:'LOW LEVEL / ASSEMBLY',desc:'Console taxi game in x86 Assembly with traffic, passengers, fuel, persistence, leaderboard, and audio.',proof:'A reminder that abstractions make more sense when you have spent time below them.',stack:['x86 Assembly','MASM','Irvine32','WinMM'],url:'https://github.com/fizzahussain/RUSHHOUR_Assembly'},
+{icon:'W',name:'Word Shooter',cats:['systems','algorithms'],tag:'C++ / OPENGL',desc:'Timed word game combining projectile mechanics, collision handling, dictionary-based word detection, and search.',proof:'Graphics, input, game state, and algorithmic lookup working together in C++.',stack:['C++','OpenGL','FreeGLUT','SDL2','Binary Search'],url:'https://github.com/fizzahussain/Wordshooter-game'},
+{icon:'▤',name:'CamCorder Website',cats:['ui','fullstack'],tag:'UI / FRONTEND',desc:'Multi-page retro camera e-commerce interface with catalogues, forms, cart and checkout UI, and media-rich presentation.',proof:'Visual hierarchy and interface structure matter to me just as much as the logic behind them.',stack:['HTML','CSS','Bootstrap','Responsive UI'],url:'https://github.com/fizzahussain/CamCorder_website'}
 ];
-let activeProject=projects[0], filter='all', projectQuery='';
-function visibleProjects(){
-  const q=projectQuery.trim().toLowerCase();
-  return projects.filter(p=>(filter==='all'||p.cat.includes(filter))&&(!q||`${p.name} ${p.tag} ${p.stack.join(' ')}`.toLowerCase().includes(q)));
-}
-function renderProjects(){
-  const list=visibleProjects();
-  if(!list.includes(activeProject)) activeProject=list[0]||projects[0];
-  qs('#questCount').textContent=`${String(list.length).padStart(2,'0')} / ${String(projects.length).padStart(2,'0')} PROJECTS LOADED`;
-  qs('#questList').innerHTML=list.length?list.map(p=>{
-    const globalIndex=projects.indexOf(p)+1;
-    return `<button class="quest-item ${p===activeProject?'active':''}" data-name="${p.name}"><span class="quest-id">Q${String(globalIndex).padStart(2,'0')}</span><span class="quest-icon">${p.icon}</span><div><b>${p.name}</b><small>${p.tag}</small></div><span class="quest-arrow">›</span></button>`;
-  }).join(''):`<div class="quest-empty"><b>NO QUESTS FOUND</b><span>Try another filter or search term.</span></div>`;
-  qsa('.quest-item').forEach(el=>el.onclick=()=>{activeProject=projects.find(p=>p.name===el.dataset.name)||projects[0];renderProjects();tone(620,.035)});
-  renderPreview();
-}
-function renderPreview(){
-  const p=activeProject;if(!p)return;
-  const liveNotice=p.live?`<div class="demo-disclaimer"><b>LIVE DEMO NOTICE</b><p><strong>Disclaimer:</strong> Live demos are adapted web versions created for demonstration and deployment purposes and may differ from the original project implementation.</p></div>`:'';
-  qs('#questPreview').innerHTML=`<div class="preview-heading"><span class="preview-tag">${p.tag}</span><span class="preview-id">QUEST ${String(projects.indexOf(p)+1).padStart(2,'0')} / ${String(projects.length).padStart(2,'0')}</span></div><h3>${p.name}</h3><p class="preview-desc">${p.desc}</p><div class="proof-box"><span>WHY THIS QUEST MATTERS</span><b>${p.proof}</b></div><div class="chip-row">${p.stack.map(s=>`<span>${s}</span>`).join('')}</div><div class="preview-actions">${p.demo?`<button class="pixel-cta bluebtn quest-demo" data-demo="${p.demo}">▶ WATCH DEMO</button>`:''}${p.live?`<a class="pixel-cta livebtn" href="${p.live}" target="_blank" rel="noreferrer">▶ OPEN LIVE DEMO ↗</a>`:''}<a class="pixel-cta yellow" href="${p.url}" target="_blank" rel="noreferrer">READ GITHUB README ↗</a></div>${liveNotice}<div class="readme-note"><b>TECHNICAL DETAILS</b><p>For architecture, implementation notes, setup, limitations, algorithms, and deeper project context, open the GitHub README.</p></div>`;
-  const demoButton=qs('.quest-demo');if(demoButton)demoButton.onclick=()=>openDemo(demoButton.dataset.demo);
-}
-qsa('#questFilters button').forEach(b=>b.onclick=()=>{qsa('#questFilters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');filter=b.dataset.filter;renderProjects()});
-const projectSearch=qs('#projectSearch');if(projectSearch)projectSearch.addEventListener('input',()=>{projectQuery=projectSearch.value;renderProjects()});
-renderProjects();
-const skills={AI:[['RAG','RAG Assistant · Revival Lab'],['Ollama','RAG Assistant'],['pgvector','RAG Assistant'],['HNSW','RAG Assistant'],['Tesseract OCR','RAG Assistant'],['faster-whisper','RAG Assistant'],['LangChain','Revival Lab'],['Gemini API','MoodMeal'],['Search AI','UNO AI']],DATA:[['Python','analysis + ML + backend'],['Pandas','EDA + analytics'],['NumPy','numerical work'],['Matplotlib','visualization'],['Seaborn','EDA'],['scikit-learn','ML workflows'],['Advanced Statistics','current course'],['Data Warehousing','current course'],['Business Intelligence','current course']],BACKEND:[['FastAPI','RAG · Finance'],['Node.js','MoodMeal · RideFlow'],['Express','MoodMeal · RideFlow'],['PostgreSQL','RAG'],['MySQL','MoodMeal · RideFlow'],['SQLite','Finance'],['SQLAlchemy','RAG'],['Alembic','RAG'],['REST APIs','multiple projects']],SYSTEMS:[['C++','games · DSA · OS'],['POSIX IPC','Parallel CSV'],['pthreads','Parallel CSV'],['Shared Memory','Parallel CSV'],['Semaphores','Parallel CSV'],['OpenGL','Rush Hour · Word Shooter'],['SDL2','games'],['x86 Assembly','Rush Hour Assembly']],CREATIVE:[['UI / UX','interfaces + design'],['Graphic Design','creative roles'],['Branding','creative work'],['Painting','personal practice'],['Pottery','personal practice'],['Visual Communication','design + marketing'],['Technical Writing','current course']]};
-function renderSkills(key){qs('#skillNodes').innerHTML=skills[key].map((x,i)=>`<div class="skill-node"><span>${String(i+1).padStart(2,'0')}</span><b>${x[0]}</b><small>${x[1]}</small></div>`).join('')};qsa('#skillTabs button').forEach(b=>b.onclick=()=>{qsa('#skillTabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderSkills(b.dataset.skill)});renderSkills('AI');
-const art=[
-['Rabbit study','Acrylic mini canvas','Small format, close observation, and the kind of thing I make simply because I want to make it.','rabbit-study','mini'],
-['Deer in bloom','Mini canvas','A tiny deer tucked into a pink and green little world. One of the mini canvases that deserved its own file instead of being hidden inside a studio photo.','deer-mini','mini'],
-['Tiny landscape pair','Mini canvas','A second small landscape from the same painting session, with sky, field, and figures compressed into a palm-sized canvas.','tiny-landscape-pair','mini'],
-['Birds among blossoms','Painting','An older piece with birds, branches and red blossoms. Detail-heavy, patient, and very different from the work I make now.','birds-blossoms','painting'],
-['Whirling red / blue','Painting','Movement first. Form second. The blur is part of the point.','whirling-red-blue','painting'],
-['Blue figure','Mixed media','A silhouette, a dress and turquoise bloom. Mood before explanation.','blue-figure','painting'],
-['Horse portrait','Acrylic painting','A horse in a suit because apparently that was the assignment my brain gave itself.','horse-portrait','painting'],
-['Desert caravan','Painting with metallic detail','Soft dunes, gold camels and a tiny traveler crossing the frame.','desert-caravan','painting'],
-['Floral watercolor','Watercolor','Loose pink and orange flowers, green leaves, splashes, and water doing most of the talking.','floral-watercolor','painting'],
-['Dervish study','Painting','A moving figure built from cool blue-gray layers and one sharp red accent.','dervish-study','painting'],
-['Calligraphy with pink florals','Acrylic / textured calligraphy','Arabic calligraphy framed by raised pink blossoms, green leaves and metallic branches. This is the real standalone piece, photographed as a finished canvas.','calligraphy-branches','painting'],
-['Tiny landscape','Mini canvas','A tiny horizon made during a painting session, small enough to hold in one hand.','mini-landscape','mini'],
-['Studio wall','Studio archive','Pieces living together on the wall instead of pretending they were made in isolation.','studio-wall','studio'],
-['2:02 AM','Late-night studio','Palette, brushes, paint tubes and a rabbit study. Side quests do not respect normal hours.','late-night-palette','studio'],
-['Clay candle holder','Handmade pottery','A hand-built clay candle holder, small, imperfect, and actually made to be used.','clay-candle-holder','craft'],
-['Cow figure','Handmade clay','The tiny cow that keeps appearing around the desk and studio. It belongs in the clay folder, not just in the background.','desk-cow','craft'],
-['Retirement cage bake','Baking / edible sculpture','A retirement-themed cage with a tiny figure. Baking decided to become sculpture for the day.','retirement-cage-bake','craft']
-];
-let artIndex=0, artFilter='all';
-function filteredArt(){return art.map((a,i)=>({a,i})).filter(x=>artFilter==='all'||x.a[4]===artFilter)}
-function renderArt(){
- const list=filteredArt();
- if(!list.some(x=>x.i===artIndex)) artIndex=list[0]?.i ?? 0;
- qs('#artThumbs').innerHTML=list.map(({a,i})=>`<button class="art-thumb ${i===artIndex?'active':''}" data-i="${i}"><img src="media/crops/${a[3]}-sq.webp" alt="${a[0]}"><span>${String(i+1).padStart(2,'0')}_${a[3].replaceAll('-','_')}.jpg</span><small>${a[1]}</small></button>`).join('');
- qsa('.art-thumb').forEach(b=>b.onclick=()=>{artIndex=+b.dataset.i;renderArt();tone(690,.035)});
- const a=art[artIndex];
- qs('#artPreviewImg').src=`media/crops/${a[3]}-portrait.webp`;qs('#artPreviewImg').alt=a[0];
- qs('#artCounter').textContent=`${String(artIndex+1).padStart(2,'0')} / ${String(art.length).padStart(2,'0')}`;
- qs('#artPreviewTitle').textContent=a[0];qs('#artPreviewMeta').textContent=a[1];qs('#artPreviewNote').textContent=a[2];
- qs('#artPath').textContent=`C:\\FIZZA\\MY_ART\\${a[4]}\\${a[3]}.jpg`;
-}
-qs('#prevArt').onclick=()=>{const list=filteredArt(),pos=list.findIndex(x=>x.i===artIndex);artIndex=list[(pos-1+list.length)%list.length].i;renderArt()};
-qs('#nextArt').onclick=()=>{const list=filteredArt(),pos=list.findIndex(x=>x.i===artIndex);artIndex=list[(pos+1)%list.length].i;renderArt()};
-qs('#shuffleArt').onclick=()=>{const list=filteredArt();artIndex=list[Math.floor(Math.random()*list.length)].i;renderArt()};
-qsa('#artFilters button').forEach(b=>b.onclick=()=>{qsa('#artFilters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');artFilter=b.dataset.artFilter;artIndex=filteredArt()[0]?.i ?? 0;renderArt();achievement(`${b.textContent} OPENED`)});
-renderArt();
-const demos={
-rag:{title:'RAG Document Assistant',file:'media/demos/rag-document-assistant-demo.mp4',poster:'media/demos/rag-poster.jpg',duration:'05:50',badge:'AI SYSTEMS // DEMO'},
-finance:{title:'Personal Finance // FinanceFlow',file:'media/demos/personal-finance-demo.mp4',poster:'media/demos/finance-poster.jpg',duration:'03:20',badge:'ANALYTICS // DEMO'}
+let activeProject=projects[0],projectFilter='all',projectQuery='';
+function filteredProjects(){const q=projectQuery.toLowerCase().trim();return projects.filter(p=>(projectFilter==='all'||p.cats.includes(projectFilter))&&(!q||`${p.name} ${p.tag} ${p.stack.join(' ')}`.toLowerCase().includes(q)))}
+function renderProjects(){const list=filteredProjects();if(!list.includes(activeProject))activeProject=list[0]||projects[0];$('#projectCount').textContent=`${list.length} / ${projects.length}`;$('#projectList').innerHTML=list.length?list.map(p=>`<button class="project-row ${p===activeProject?'active':''}" data-name="${p.name}"><b>${p.icon}</b><div><b>${p.name}</b><small>${p.tag}</small></div><span>OPEN</span></button>`).join(''):'<div style="padding:28px;font-family:VT323;font-size:22px">No quests match that search.</div>';$$('.project-row').forEach(b=>b.onclick=()=>{activeProject=projects.find(p=>p.name===b.dataset.name)||projects[0];renderProjects()});renderProjectPreview(activeProject)}
+function renderProjectPreview(p){const disclaimer=p.live?`<div class="live-box"><b>LIVE DEMO NOTE</b><p>Live demos are adapted web versions created for demonstration and deployment purposes and may differ from the original project implementation.</p></div>`:'';$('#projectPreview').innerHTML=`<span class="preview-tag">${p.tag}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="proof-box"><span>WHY THIS ONE MATTERS</span><b>${p.proof}</b></div><div class="chip-row">${p.stack.map(s=>`<span>${s}</span>`).join('')}</div><div class="preview-actions">${p.demo?`<button class="demo-open" data-demo="${p.demo}">▶ WATCH DEMO</button>`:''}${p.live?`<a class="live" href="${p.live}" target="_blank" rel="noreferrer">LIVE DEMO ↗</a>`:''}<a class="readme" href="${p.url}" target="_blank" rel="noreferrer">READ GITHUB README ↗</a></div>${disclaimer}<div class="readme-box"><b>FOR THE FULL PROJECT</b><p>Open the GitHub README for architecture, implementation notes, methodology, algorithms, setup, limitations, and deeper project context.</p></div>`;$$('.demo-open').forEach(b=>b.onclick=()=>openDemo(b.dataset.demo))}
+$$('#projectFilters button').forEach(b=>b.onclick=()=>{$$('#projectFilters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');projectFilter=b.dataset.filter;renderProjects()});$('#projectSearch').oninput=e=>{projectQuery=e.target.value;renderProjects()};renderProjects();
+const career={
+'2024':[['Data Analytics Intern','Sahl Pakistan','DATA']],
+'2025':[['STEM Tutor','My Tutor Source · 2025 to Present','TEACHING'],['Web Development Trainee','MicroMerger','SOFTWARE'],['Lead Graphics Designer','Nerdy Labs','DESIGN'],['Tech & Creatives Intern','Unmute Pakistan','TECH / CREATIVE'],['Introduction to Technology Apprenticeship Simulation','Accenture UK','TECHNOLOGY']],
+'2026':[['Technical / Regulatory Affairs Intern','Jazz Pakistan / Jazz World','TECH / REGULATORY'],['Data Science & AI Intern','Beta Codes Pakistan','AI / DATA'],['Founder & Lead Tutor','MindCraft Tuition · 2026 to Present','TEACHING / LEADERSHIP']]
 };
-function openDemo(key){
- const d=demos[key];if(!d)return;
- const overlay=qs('#demoOverlay'),video=qs('#demoVideo');
- qs('#demoTitle').textContent=d.title;qs('#demoNowPlaying').textContent=d.title;qs('#demoWindowTitle').textContent=`MEDIA_PLAYER.EXE // ${d.title.toUpperCase()}`;qs('#demoDuration').textContent=d.duration;qs('#demoBadge').textContent=d.badge;
- video.pause();video.src=d.file;video.poster=d.poster;video.load();
- overlay.classList.remove('hidden');overlay.setAttribute('aria-hidden','false');document.body.classList.add('demo-open');
- tone(520,.045);achievement(`${d.title.toUpperCase()} DEMO LOADED`);
-}
-function closeDemo(){const overlay=qs('#demoOverlay'),video=qs('#demoVideo');video.pause();video.removeAttribute('src');video.load();overlay.classList.add('hidden');overlay.setAttribute('aria-hidden','true');document.body.classList.remove('demo-open')}
-qs('#openRagDemo').onclick=()=>openDemo('rag');
-qs('#closeDemo').onclick=closeDemo;
-qs('#demoOverlay').onclick=e=>{if(e.target===e.currentTarget)closeDemo()};
-const career=[
-['2026','Technical / Regulatory Affairs Intern','Jazz Pakistan / Jazz World','TECH / REGULATORY'],
-['2026','Data Science & AI Intern','Beta Codes Pakistan','AI / DATA'],
-['2026 to Present','Founder & Lead Tutor','MindCraft Tuition','TEACHING / LEADERSHIP'],
-['2025 to Present','STEM Tutor','My Tutor Source','TEACHING'],
-['2025','Web Development Trainee','MicroMerger','SOFTWARE'],
-['2024','Data Analytics Intern','Sahl Pakistan','DATA'],
-['2025','Lead Graphics Designer','Nerdy Labs','DESIGN'],
-['2025','Tech & Creatives Intern','Unmute Pakistan','TECH / CREATIVE'],
-['2025','Introduction to Technology Apprenticeship Simulation','Accenture UK','TECHNOLOGY']
+$('#careerTimeline').innerHTML=Object.entries(career).map(([year,items])=>`<section class="career-year-block"><h3>${year}</h3>${items.map(x=>`<div class="career-entry"><div><b>${x[0]}</b><span>${x[1]}</span></div><small>${x[2]}</small></div>`).join('')}</section>`).join('');
+const societies=[
+['FAST Data Science Society',['Vice Head Projects','Marketing role within the society']],
+['FAST Entrepreneurship & Startup Society',['Marketing Secretary & Content Creation','Head of Marketing']],
+['FAST Community Service Society',['Head of Marketing','Sponsorship Secretary']],
+['NasCon',['Head, Data Detective','Officer, Edathon']],
+['IEEE',['IEEE Member','Member, IEEE Computer Society','Part of IEEE Islamabad Chapter','EC involvement / running for EC']],
+['Women in Computing',['Member, Women in Computing at FAST-NUCES']],
+['Earlier Leadership at LGS Islamabad',['Deputy President, Business & Economics Society','Model UN involvement','Sports events including DSP Regionals','Student council / ambassador roles','Outdoor council involvement']]
 ];
-qs('#careerLog').innerHTML=career.map((x,i)=>`<div class="career-entry"><span class="career-year">${x[0]}</span><div class="career-role"><b>${x[1]}</b><small>${x[2]}</small></div><span class="career-track">${x[3]}</span></div>`).join('');
-function openMap(){qs('#mapPanel').classList.remove('hidden')}qs('#openMap').onclick=openMap;qs('#railMap').onclick=openMap;qs('#closeMap').onclick=()=>qs('#mapPanel').classList.add('hidden');qsa('.map-grid a').forEach(a=>a.onclick=()=>qs('#mapPanel').classList.add('hidden'));
-let achTimer;function achievement(text){clearTimeout(achTimer);qs('#achievementText').textContent=text;qs('#achievement').classList.remove('hidden');achTimer=setTimeout(()=>qs('#achievement').classList.add('hidden'),2400)}
-const sections=qsa('.stage');let seen=new Set();const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){const i=sections.indexOf(e.target);qs('#xpFill').style.width=`${Math.min(100,((i+1)/sections.length)*100)}%`;qs('#xpText').textContent=`XP ${String((i+1)*100).padStart(3,'0')} / ${sections.length*100}`;if(!seen.has(e.target.id)&&seen.size){achievement(`${e.target.id.toUpperCase()} DISCOVERED`)}seen.add(e.target.id)}}),{threshold:.4});sections.forEach(s=>obs.observe(s));
-window.addEventListener('keydown',e=>{if(e.key==='Escape'&&!qs('#demoOverlay').classList.contains('hidden')){closeDemo();return}if(e.key.toLowerCase()==='m')openMap();if(e.key.toLowerCase()==='a')qs('#about').scrollIntoView({behavior:'smooth'});if(e.key.toLowerCase()==='p')qs('#projects').scrollIntoView({behavior:'smooth'});const n=+e.key;if(n>=1&&n<=8)sections[n-1]?.scrollIntoView({behavior:'smooth'})});
-
-// V10 // playable avatar world + pixel motion
-(()=>{
-  const world=document.querySelector('#avatarWorld');
-  const avatar=document.querySelector('#playerAvatar');
-  if(!world||!avatar)return;
-
-  const state={x:50,y:58,tx:50,ty:58,keys:new Set(),walking:false,lastDir:1,near:null};
-  const speed=22;
-  let last=performance.now();
-
-  const portals=[...world.querySelectorAll('.world-portal')];
-  portals.forEach(p=>{
-    if(p.dataset.warp){
-      p.addEventListener('click',()=>document.querySelector(p.dataset.warp)?.scrollIntoView({behavior:'smooth'}));
-    }
-  });
-
-  function clamp(v,min,max){return Math.max(min,Math.min(max,v))}
-  function place(){
-    avatar.style.left=`${state.x}%`;
-    avatar.style.top=`${state.y}%`;
-    avatar.classList.toggle('walking',state.walking);
-    avatar.classList.toggle('flip',state.lastDir<0);
-  }
-
-  function nearestPortal(){
-    const ar=avatar.getBoundingClientRect();
-    const ax=ar.left+ar.width/2, ay=ar.top+ar.height/2;
-    let best=null,bestD=Infinity;
-    portals.forEach(p=>{
-      const r=p.getBoundingClientRect();
-      const px=r.left+r.width/2, py=r.top+r.height/2;
-      const d=Math.hypot(px-ax,py-ay);
-      if(d<bestD){bestD=d;best=p}
-    });
-    state.near=bestD<92?best:null;
-    portals.forEach(p=>p.classList.toggle('near-player',p===state.near));
-    const hint=world.querySelector('.world-hint');
-    if(hint){
-      hint.innerHTML=state.near?`<b>ENTER</b> OPEN ${state.near.querySelector('small')?.textContent||'PORTAL'} <span>•</span> WASD / ARROWS`:`<b>MOVE</b> WASD / ARROWS / CLICK <span>•</span> WALK INTO A PORTAL`;
-    }
-  }
-
-  function activateNearest(){
-    const p=state.near;
-    if(!p)return;
-    if(p.dataset.warp){
-      achievement(`${p.querySelector('small')?.textContent||'PORTAL'} ENTERED`);
-      document.querySelector(p.dataset.warp)?.scrollIntoView({behavior:'smooth'});
-    }else if(p.href){
-      window.open(p.href,'_blank','noopener');
-    }
-  }
-
-  function frame(now){
-    const dt=Math.min(.04,(now-last)/1000);last=now;
-    let dx=0,dy=0;
-    if(state.keys.has('arrowleft')||state.keys.has('a'))dx-=1;
-    if(state.keys.has('arrowright')||state.keys.has('d'))dx+=1;
-    if(state.keys.has('arrowup')||state.keys.has('w'))dy-=1;
-    if(state.keys.has('arrowdown')||state.keys.has('s'))dy+=1;
-    const keyMoving=dx||dy;
-    if(keyMoving){
-      const len=Math.hypot(dx,dy)||1;dx/=len;dy/=len;
-      state.x=clamp(state.x+dx*speed*dt,7,92);
-      state.y=clamp(state.y+dy*speed*dt,22,79);
-      state.tx=state.x;state.ty=state.y;
-      if(dx)state.lastDir=Math.sign(dx);
-      state.walking=true;
-    }else{
-      const ddx=state.tx-state.x, ddy=state.ty-state.y;
-      const dist=Math.hypot(ddx,ddy);
-      if(dist>.3){
-        state.x+=ddx*Math.min(1,dt*5.2);
-        state.y+=ddy*Math.min(1,dt*5.2);
-        if(Math.abs(ddx)>.2)state.lastDir=Math.sign(ddx);
-        state.walking=true;
-      }else state.walking=false;
-    }
-    place();nearestPortal();requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
-
-  world.addEventListener('pointerdown',e=>{
-    if(e.target.closest('.world-portal'))return;
-    const r=world.getBoundingClientRect();
-    state.tx=clamp(((e.clientX-r.left)/r.width)*100,7,92);
-    state.ty=clamp(((e.clientY-r.top)/r.height)*100,22,79);
-    world.focus();
-  });
-  world.addEventListener('keydown',e=>{
-    const k=e.key.toLowerCase();
-    if(['arrowleft','arrowright','arrowup','arrowdown','w','a','s','d'].includes(k)){e.preventDefault();state.keys.add(k)}
-    if(k==='enter'){e.preventDefault();activateNearest()}
-  });
-  world.addEventListener('keyup',e=>state.keys.delete(e.key.toLowerCase()));
-  world.addEventListener('blur',()=>state.keys.clear());
-
-  // Tiny pixel trail. Deliberately sparse so it feels game-like, not glittery.
-  let lastTrail=0;
-  window.addEventListener('pointermove',e=>{
-    if(innerWidth<700||e.timeStamp-lastTrail<55)return;lastTrail=e.timeStamp;
-    const dot=document.createElement('i');dot.className='cursor-pixel';dot.style.left=`${e.clientX+5}px`;dot.style.top=`${e.clientY+7}px`;document.body.appendChild(dot);setTimeout(()=>dot.remove(),620);
-  },{passive:true});
-
-  // Motion state for section entrances
-  const motionObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
-    if(entry.isIntersecting)entry.target.classList.add('stage-live');
-  }),{threshold:.18});
-  document.querySelectorAll('.stage').forEach(el=>motionObserver.observe(el));
-})();
+$('#societyGrid').innerHTML=societies.map((s,i)=>`<article class="society-card"><span>NODE ${String(i+1).padStart(2,'0')}</span><h3>${s[0]}</h3><ul>${s[1].map(x=>`<li>${x}</li>`).join('')}</ul></article>`).join('');
+const art=[
+['Calligraphy & flowers','acrylic / calligraphy','The floral calligraphy canvas you sent.','calligraphy-flowers'],['Deer mini canvas','mini canvas','A small deer study from the mini-canvas set.','deer-mini'],['Rabbit study','mini canvas','Small format, lots of attention.','rabbit-study'],['Floral watercolor','watercolor','Loose color and movement instead of perfect edges.','floral-watercolor'],['Birds among blossoms','painting','A bright older piece with birds and red blossoms.','birds-blossoms'],['Horse portrait','acrylic','A horse portrait study.','horse-portrait'],['Dervish study','painting','Movement, fabric, and atmosphere.','dervish-study'],['Blue figure','mixed media','A darker figure study built around silhouette and blue.','blue-figure'],['Desert caravan','painting','A warm desert scene with camels and metallic detail.','desert-caravan'],['Whirling red / blue','painting','An abstract motion study.','whirling-red-blue'],['Tiny landscape','mini canvas','A small landscape painted in miniature.','mini-landscape'],['Clay candle holder','pottery','A hand-built clay candle holder.','clay-candle-holder'],['Cow figure','clay','A small cow figure from the clay side quests.','desk-cow'],['Retirement cage bake','baking','An edible retirement piece. Definitely baking, not pottery.','retirement-cage-bake'],['2:02 AM studio','studio','Palette, paint tubes, and proof that the art side quest sometimes runs very late.','late-night-palette']
+];let artIndex=0;
+function renderArt(){const wall=$('#artWall');wall.innerHTML=art.map((a,i)=>`<button class="art-frame ${i===artIndex?'active':''}" data-i="${i}" style="--tilt:${(i%5-2)*.7}deg"><img src="media/crops/${a[3]}-sq.webp" alt="${a[0]}"><span>${a[0]}</span></button>`).join('');$$('.art-frame').forEach(b=>b.onclick=()=>{artIndex=+b.dataset.i;renderArt()});const a=art[artIndex];$('#artMain').src=`media/crops/${a[3]}-portrait.webp`;$('#artMain').alt=a[0];$('#artCounter').textContent=`${String(artIndex+1).padStart(2,'0')} / ${String(art.length).padStart(2,'0')}`;$('#artType').textContent=a[1];$('#artTitle').textContent=a[0];$('#artNote').textContent=a[2]}
+$('#artPrev').onclick=()=>{artIndex=(artIndex-1+art.length)%art.length;renderArt()};$('#artNext').onclick=()=>{artIndex=(artIndex+1)%art.length;renderArt()};renderArt();
+const demos={rag:{title:'RAG Document Assistant',file:'media/demos/rag-document-assistant-demo.mp4',poster:'media/demos/rag-poster.jpg',meta:'AI SYSTEMS · 05:50'},finance:{title:'Personal Finance Management System',file:'media/demos/personal-finance-demo.mp4',poster:'media/demos/finance-poster.jpg',meta:'ANALYTICS · 03:20'}};
+function openDemo(key){const d=demos[key];if(!d)return;$('#demoTitle').textContent=`MEDIA_PLAYER.EXE // ${d.title}`;$('#demoMeta').textContent=d.meta;const v=$('#demoVideo');v.src=d.file;v.poster=d.poster;v.load();$('#demoOverlay').classList.remove('hidden');$('#demoOverlay').setAttribute('aria-hidden','false');achievement(`${d.title.toUpperCase()} LOADED`)}function closeDemo(){const v=$('#demoVideo');v.pause();v.removeAttribute('src');v.load();$('#demoOverlay').classList.add('hidden');$('#demoOverlay').setAttribute('aria-hidden','true')}$('#demoClose').onclick=closeDemo;$('#demoOverlay').onclick=e=>{if(e.target===e.currentTarget)closeDemo()};$$('.demo-open').forEach(b=>b.onclick=()=>openDemo(b.dataset.demo));
+const levels=$$('.level');let seen=new Set();const levelObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(!entry.isIntersecting)return;const level=entry.target;const idx=levels.indexOf(level);$('#progressFill').style.width=`${((idx+1)/levels.length)*100}%`;$$('.hud-nav a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')===`#${level.id}`));const guideMode=level.dataset.avatar||avatarMode;$('#guideAvatar').src=avatarSrc[guideMode];$('#guideLevel').textContent=`LEVEL ${level.dataset.level}`;$('#guideText').textContent=level.dataset.guide||'';if(!seen.has(level.id)){if(seen.size)achievement(`${level.id.toUpperCase()} DISCOVERED`);seen.add(level.id)}}),{threshold:.42});levels.forEach(l=>levelObserver.observe(l));
+window.addEventListener('scroll',()=>{const y=window.scrollY;if(Math.abs(y-lastY)>3){$('#guide').classList.add('walking');clearTimeout(walkTimer);walkTimer=setTimeout(()=>$('#guide').classList.remove('walking'),140)}lastY=y},{passive:true});
+window.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!$('#demoOverlay').classList.contains('hidden'))closeDemo();else if(!$('#mapPanel').classList.contains('hidden'))$('#mapPanel').classList.add('hidden')}if(e.key.toLowerCase()==='m')openMap();if(e.key.toLowerCase()==='p')$('#projects').scrollIntoView({behavior:'smooth'});if(e.key.toLowerCase()==='a')$('#art').scrollIntoView({behavior:'smooth'})});

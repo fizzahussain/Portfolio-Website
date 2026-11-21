@@ -46,7 +46,7 @@ $$('#projectFilters button').forEach(b=>b.onclick=()=>{$$('#projectFilters butto
 const career={
 '2024':[['Data Analytics Intern','Sahl Pakistan','DATA']],
 '2025':[['STEM Tutor','My Tutor Source · 2025 to Present','TEACHING'],['Web Development Trainee','MicroMerger','SOFTWARE'],['Lead Graphics Designer','Nerdy Labs','DESIGN'],['Tech & Creatives Intern','Unmute Pakistan','TECH / CREATIVE'],['Introduction to Technology Apprenticeship Simulation','Accenture UK','TECHNOLOGY']],
-'2026':[['Data Science & AI Intern','GSME · FAQ RAG development; Assistant Project Manager supporting Power BI product/wafer-status dashboards · Sep 2026 to Present','AI / DATA + BI'],['Data Science & AI Intern','BetaCodes · RAG systems, ETL QA, and backend/data-platform work','AI / DATA'],['Founder & Lead Tutor','MindCraft Tuition · 2026 to Present','TEACHING / LEADERSHIP']]
+'2026':[['Data Science & AI Intern','GSME · 22 Sep 2026 to Present · FAQ RAG development; Assistant Project Manager supporting Power BI product/wafer-status dashboards','AI / DATA + BI'],['Data Science & AI Intern','BetaCodes · 1 Jul to 30 Aug 2026 · RAG systems, ETL QA, and backend/data-platform work','AI / DATA'],['Founder & Lead Tutor','MindCraft Tuition · 2026 to Present','TEACHING / LEADERSHIP']]
 };
 $('#careerTimeline').innerHTML=Object.entries(career).map(([year,items])=>`<section class="career-year-block"><h3>${year}</h3>${items.map(x=>`<div class="career-entry"><div><b>${x[0]}</b><span>${x[1]}</span></div><small>${x[2]}</small></div>`).join('')}</section>`).join('');
 const societies=[

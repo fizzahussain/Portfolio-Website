@@ -138,9 +138,9 @@
       </section>
 
       <section id="projects" class="level level-projects" data-level="04" data-avatar="glasses" data-guide="no project should get lost in the game, so this level is deliberately boring in the best way: everything is indexed.">
-        <div class="level-copy compact"><span class="level-tag">LEVEL 04 · PROJECT INDEX</span><h2>Seventeen builds.<br><em>One directory.</em></h2><p class="lead">Search, filter, inspect, open the README, or launch a demo when one exists.</p></div>
+        <div class="level-copy compact"><span class="level-tag">LEVEL 04 · PROJECT INDEX</span><h2>Seventeen builds.<br><em>One directory.</em></h2><p class="lead">Pick a folder to inspect the build, then open its repository or live demo.</p></div>
         <div class="project-explorer os-window">
-          <div class="window-bar"><span>PROJECT_INDEX.EXE</span><span id="projectCount">17 / 17</span></div>
+          <div class="window-bar"><span>PROJECT_FOLDERS.EXE</span><span id="projectCount">17 / 17</span></div>
           <div class="project-toolbar"><div id="projectFilters" class="filter-row"><button class="active" data-filter="all">ALL</button><button data-filter="data">AI + DATA</button><button data-filter="research">RESEARCH</button><button data-filter="fullstack">FULL STACK</button><button data-filter="algorithms">ALGORITHMS</button><button data-filter="systems">SYSTEMS</button><button data-filter="lowlevel">LOW LEVEL</button><button data-filter="ui">UI</button></div><label>FIND QUEST <input id="projectSearch" type="search" placeholder="rag, uno, c++, finance..."></label></div>
           <div class="project-layout"><div id="projectList" class="project-list"></div><div id="projectPreview" class="project-preview"></div></div>
         </div>
@@ -180,8 +180,29 @@
       <section id="contact" class="level level-contact" data-level="10" data-avatar="glasses" data-guide="you made it. here are the useful buttons.">
         <div class="end-card"><span>FINAL SCREEN</span><h2>Want to build something interesting?</h2><p>I am looking for opportunities where I can learn, contribute, and grow across AI, Data Science, ML systems, software engineering, retrieval, analytics, and intelligent products.</p><div class="end-actions"><a href="mailto:fizzashah0300@gmail.com">EMAIL</a><a href="https://www.linkedin.com/in/fizza-hussain-97a171279" target="_blank" rel="noreferrer">LINKEDIN ↗</a><a href="https://github.com/fizzahussain" target="_blank" rel="noreferrer">GITHUB ↗</a></div><small>fizzashah0300@gmail.com</small></div>
       </section>
+
+      <section id="goodbye" class="level level-footer" data-level="11" data-avatar="casual" data-guide="thanks for stopping by. the internet is a small place.">
+        <div class="footer-heading"><span class="level-tag">BONUS LEVEL · THE WORLD KEEPS MOVING</span><h2>See you <em>around.</em></h2><p>Thanks for taking a little walk through my corner of the internet. Until the next interesting thing.</p></div>
+        <div class="pixel-street" aria-label="A little animated street scene with Fizza in the middle and people walking by">
+          <div class="street-sky"><span class="street-star star-one">✦</span><span class="street-star star-two">✧</span><span class="street-star star-three">✦</span></div><div class="street-sign sign-left">KEEP<br>EXPLORING</div><div class="street-sign sign-right">GOOD<br>THINGS AHEAD</div><div class="street-ground"></div>
+          <div class="street-walker walker-one" aria-hidden="true"><span>🧍🏻‍♀️</span></div><div class="street-walker walker-two" aria-hidden="true"><span>🚶🏽</span></div><div class="street-walker walker-three" aria-hidden="true"><span>🧑🏻‍💻</span></div>
+          <div class="street-you"><span class="you-label">PLAYER 01 · FIZZA</span><div class="you-avatar"><img src="media/ui/fizza-glasses.jpg" alt="Pixel avatar representing Fizza"></div><span class="you-caption">usually building something</span></div><div class="street-path"></div>
+        </div>
+        <div class="footer-bottom"><div><b>UNTIL NEXT TIME.</b><span>Keep in touch, share an idea, or just say hello.</span></div><div class="footer-links"><a href="mailto:fizzashah0300@gmail.com">EMAIL ↗</a><a href="https://www.linkedin.com/in/fizza-hussain-97a171279" target="_blank" rel="noreferrer">LINKEDIN ↗</a><a href="https://github.com/fizzahussain" target="_blank" rel="noreferrer">GITHUB ↗</a></div><button id="footerFlip" class="footer-flip" type="button" aria-pressed="false">↻ FLIP THE SIGN</button></div>
+        <div class="footer-sign-card" id="footerSignCard"><span>POSTCARD FROM FIZZA</span><b>Stay curious.<br>Make something kind.</b><small>ISLAMABAD · EARTH · INTERNET</small></div>
+      </section>
     </main>
 
+
+    <div id="chatWidget" class="chat-widget">
+      <button id="chatToggle" class="chat-launcher" type="button" aria-expanded="false" aria-controls="chatPanel"><span class="chat-dot"></span> SAY HELLO <b>✦</b></button>
+      <section id="chatPanel" class="chat-panel hidden" aria-label="Message Fizza">
+        <div class="chat-head"><div><small>FIZZA.EXE</small><b>Hey, nice to meet you.</b></div><button id="chatClose" type="button" aria-label="Close chat">×</button></div>
+        <div id="chatMessages" class="chat-messages" aria-live="polite"><p class="bot-message">I can point you to a project, tell you a little about what I work on, or help you leave me a message.</p></div>
+        <div class="chat-quick" id="chatQuick"><button type="button" data-chat="projects">Show me your projects</button><button type="button" data-chat="work">What are you working on?</button><button type="button" data-chat="contact">How can I reach you?</button></div>
+        <form id="chatForm" class="chat-form"><label for="chatInput">Leave a message</label><textarea id="chatInput" rows="2" maxlength="1200" placeholder="Write a little note..." required></textarea><button type="submit">OPEN EMAIL DRAFT ↗</button></form><p class="chat-note">Your message opens in your email app. Nothing is sent automatically.</p>
+      </section>
+    </div>
     <div id="achievement" class="achievement hidden"><b>ACHIEVEMENT UNLOCKED</b><span id="achievementText"></span></div>
     <div id="demoOverlay" class="demo-overlay hidden" aria-hidden="true"><div class="demo-window os-window"><div class="window-bar"><span id="demoTitle">MEDIA_PLAYER.EXE</span><button id="demoClose">×</button></div><video id="demoVideo" controls playsinline preload="metadata"></video><div class="demo-footer"><span id="demoMeta"></span><b>ESC TO CLOSE</b></div></div></div>
   </div>

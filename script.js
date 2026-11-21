@@ -44,7 +44,7 @@ const projects=[
 ];
 let activeProject=projects[0],projectFilter='all',projectQuery='';
 function filteredProjects(){const q=projectQuery.toLowerCase().trim();return projects.filter(p=>(projectFilter==='all'||p.cats.includes(projectFilter))&&(!q||`${p.name} ${p.tag} ${p.stack.join(' ')}`.toLowerCase().includes(q)))}
-function renderProjects(){const list=filteredProjects();if(!list.includes(activeProject))activeProject=list[0]||projects[0];$('#projectCount').textContent=`${list.length} / ${projects.length}`;$('#projectList').innerHTML=list.length?list.map(p=>`<button class="project-row ${p===activeProject?'active':''}" data-name="${p.name}"><b>${p.icon}</b><div><b>${p.name}</b><small>${p.tag}</small></div>${p.badge ? '<em class="project-badge">'+p.badge+'</em>' : '<span>OPEN</span>'}</button>`).join(''):'<div style="padding:28px;font-family:VT323;font-size:22px">No quests match that search.</div>';$$('.project-row').forEach(b=>b.onclick=()=>{activeProject=projects.find(p=>p.name===b.dataset.name)||projects[0];renderProjects()});renderProjectPreview(activeProject)}
+function renderProjects(){const list=filteredProjects();if(!list.includes(activeProject))activeProject=list[0]||projects[0];$('#projectCount').textContent=`${list.length} / ${projects.length}`;$('#projectList').innerHTML=list.length?list.map(p=>`<button class="project-row ${p===activeProject?'active':''}" data-name="${p.name}"><span class="folder-glyph" aria-hidden="true">📁</span><div><b>${p.name}</b><small>${p.tag}</small></div>${p.badge ? '<em class="project-badge">'+p.badge+'</em>' : '<span>OPEN</span>'}</button>`).join(''):'<div style="padding:28px;font-family:VT323;font-size:22px">No quests match that search.</div>';$$('.project-row').forEach(b=>b.onclick=()=>{activeProject=projects.find(p=>p.name===b.dataset.name)||projects[0];renderProjects()});renderProjectPreview(activeProject)}
 function renderProjectPreview(p){const disclaimer=p.live?`<div class="live-box"><b>LIVE DEMO NOTE</b><p>Live demos are adapted web versions created for demonstration and deployment purposes and may differ from the original project implementation.</p></div>`:'';$('#projectPreview').innerHTML=`${p.badge ? '<span class="project-badge preview-badge">'+p.badge+'</span>' : ''}<span class="preview-tag">${p.tag}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="proof-box"><span>WHY THIS ONE MATTERS</span><b>${p.proof}</b></div><div class="chip-row">${p.stack.map(s=>`<span>${s}</span>`).join('')}</div><div class="preview-actions">${p.demo?`<button class="demo-open" data-demo="${p.demo}">▶ WATCH DEMO</button>`:''}${p.live?`<a class="live" href="${p.live}" target="_blank" rel="noreferrer">LIVE DEMO ↗</a>`:''}<a class="readme" href="${p.url}" target="_blank" rel="noreferrer">READ GITHUB README ↗</a></div>${disclaimer}<div class="readme-box"><b>FOR THE FULL PROJECT</b><p>Open the GitHub README for architecture, implementation notes, methodology, algorithms, setup, limitations, and deeper project context.</p></div>`;$$('.demo-open').forEach(b=>b.onclick=()=>openDemo(b.dataset.demo))}
 $$('#projectFilters button').forEach(b=>b.onclick=()=>{$$('#projectFilters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');projectFilter=b.dataset.filter;renderProjects()});$('#projectSearch').oninput=e=>{projectQuery=e.target.value;renderProjects()};renderProjects();
 const career={
@@ -79,3 +79,53 @@ function openDemo(key){const d=demos[key];if(!d)return;$('#demoTitle').textConte
 const levels=$$('.level');let seen=new Set();const levelObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(!entry.isIntersecting)return;const level=entry.target;const idx=levels.indexOf(level);$('#progressFill').style.width=`${((idx+1)/levels.length)*100}%`;$$('.hud-nav a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')===`#${level.id}`));const guideMode=level.dataset.avatar||avatarMode;$('#guideAvatar').src=avatarSrc[guideMode];$('#guideLevel').textContent=`LEVEL ${level.dataset.level}`;$('#guideText').textContent=level.dataset.guide||'';if(!seen.has(level.id)){if(seen.size)achievement(`${level.id.toUpperCase()} DISCOVERED`);seen.add(level.id)}}),{threshold:.42});levels.forEach(l=>levelObserver.observe(l));
 window.addEventListener('scroll',()=>{const y=window.scrollY;if(Math.abs(y-lastY)>3){$('#guide').classList.add('walking');clearTimeout(walkTimer);walkTimer=setTimeout(()=>$('#guide').classList.remove('walking'),140)}lastY=y},{passive:true});
 window.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!$('#demoOverlay').classList.contains('hidden'))closeDemo();else if(!$('#mapPanel').classList.contains('hidden'))$('#mapPanel').classList.add('hidden')}if(e.key.toLowerCase()==='m')openMap();if(e.key.toLowerCase()==='p')$('#projects').scrollIntoView({behavior:'smooth'});if(e.key.toLowerCase()==='a')$('#art').scrollIntoView({behavior:'smooth'})});
+
+
+// Footer scene, project folders, and the contact companion.
+const flipButton = $('#footerFlip');
+if (flipButton) flipButton.addEventListener('click', () => {
+  const card = $('#footerSignCard');
+  const flipped = card.classList.toggle('flipped');
+  flipButton.setAttribute('aria-pressed', String(flipped));
+  flipButton.textContent = flipped ? '↻ FLIP IT BACK' : '↻ FLIP THE SIGN';
+  tone(flipped ? 720 : 520, .05);
+});
+const chatToggle = $('#chatToggle');
+const chatPanel = $('#chatPanel');
+function toggleChat(open) {
+  if (!chatPanel || !chatToggle) return;
+  chatPanel.classList.toggle('hidden', !open);
+  chatToggle.setAttribute('aria-expanded', String(open));
+  if (open) $('#chatInput').focus();
+}
+if (chatToggle) chatToggle.addEventListener('click', () => toggleChat(chatPanel.classList.contains('hidden')));
+if ($('#chatClose')) $('#chatClose').addEventListener('click', () => toggleChat(false));
+function addChatMessage(message, kind='bot-message') {
+  const node = document.createElement('p');
+  node.className = kind;
+  node.textContent = message;
+  $('#chatMessages').appendChild(node);
+  $('#chatMessages').scrollTop = $('#chatMessages').scrollHeight;
+}
+const chatReplies = {
+  projects: 'The project folders cover AI and RAG systems, data engineering, research, full-stack builds, algorithms, and low-level systems. Open the Project Index to browse them.',
+  work: 'I am a Data Science & AI intern working on document intelligence and FAQ retrieval, and I also enjoy building backend systems, exploring LLM evaluation, and working with analytics.',
+  contact: 'You can reach me at fizzashah0300@gmail.com, or through LinkedIn. If you write a note here, I will prepare it in your email app.'
+};
+$$('[data-chat]').forEach(button => button.addEventListener('click', () => {
+  addChatMessage(button.textContent, 'visitor-message');
+  addChatMessage(chatReplies[button.dataset.chat]);
+}));
+if ($('#chatForm')) $('#chatForm').addEventListener('submit', event => {
+  event.preventDefault();
+  const message = $('#chatInput').value.trim();
+  if (!message) return;
+  const subject = 'A message from your portfolio';
+  const body = message + '\n\nSent from the portfolio contact companion.';
+  window.location.href = 'mailto:fizzashah0300@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  addChatMessage('Your email draft is ready. Thanks for reaching out!', 'bot-message');
+  $('#chatInput').value = '';
+});
+window.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && chatPanel && !chatPanel.classList.contains('hidden')) toggleChat(false);
+});

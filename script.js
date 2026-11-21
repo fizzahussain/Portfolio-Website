@@ -59,7 +59,7 @@ const career={
 ['Founder & Lead Tutor','MindCraft Tuition · 2026 to Present','TEACHING / LEADERSHIP']
 ]
 }
-$('#careerTimeline').innerHTML=Object.entries(career).map(([year,items])=>`<section class="career-year-block"><h3>${year}</h3>${items.map(x=>{const parts=x[1].split(' · ');const company=parts.shift();const details=parts.join(' · ');return `<div class="career-entry"><div><b class="career-company">${company}</b><span>${x[0]}${details?' · '+details:''}</span></div><small>${x[2]}</small></div>`}).join('')}</section>`).join('');
+$('#careerTimeline').innerHTML=Object.entries(career).map(([year,items])=>`<section class="career-year-block"><h3>${year}</h3>${items.map(x=>{const parts=x[1].split(' · ');const company=parts.shift();const details=parts.join(' · ');return `<div class="career-entry"><div class="career-copy"><b class="career-company">${company}</b><strong class="career-role">${x[0]}</strong>${details?`<span class="career-details">${details}</span>`:''}</div><small>${x[2]}</small></div>`}).join('')}</section>`).join('');
 const societies=[
 ['IEEE Computer Society & Women in Computing',['General Secretary','IEEE Student Member · IEEE Computer Society']],
 ['FAST Data Science Society',['Vice Head of Projects']],

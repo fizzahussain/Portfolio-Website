@@ -132,3 +132,33 @@ main{padding-top:68px}.level{position:relative;min-height:100vh;padding:110px ma
 @keyframes world-walk-left{from{translate:2% 0}to{translate:-7% 0}}
 @keyframes world-walk-right{from{translate:-3% 0}to{translate:5% 0}}
 @media(prefers-reduced-motion:reduce){.world-back,.world-front{animation:none!important}}
+
+
+/* Footer cleanup and corrected player/crowd motion */
+.footer-bottom .footer-links{display:none!important}
+.player-portrait-wrap{position:relative;z-index:6;width:clamp(82px,10vw,132px);height:clamp(126px,18vw,205px);display:flex;align-items:flex-end;justify-content:center;filter:drop-shadow(5px 6px 0 rgba(35,25,66,.25))}
+.player-portrait{position:relative;z-index:2;display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom;image-rendering:pixelated}
+.player-glow{position:absolute;bottom:0;left:8%;right:8%;height:14px;background:rgba(38,27,68,.28);border-radius:50%;filter:blur(4px)}
+.world-player{height:75%;bottom:12%;width:clamp(82px,10vw,132px);align-items:flex-end}
+.world-player .player-nameplate{top:-8px}
+.world-player .player-speech{display:none}
+.world-layers{display:block;left:0;right:0;bottom:15%;height:62%;overflow:visible;transform:none!important}
+.world-back{z-index:2;bottom:21%;height:48%;opacity:.74}
+.world-front{z-index:4;bottom:10%;height:68%;opacity:1}
+.world-layers .pixel-person{position:absolute;left:calc(var(--lane-index, 0) * 11.5% - 55px);bottom:0;width:clamp(38px,5.5vw,70px);height:100%;max-height:170px;display:flex;animation:cross-right 27s linear infinite;animation-delay:calc(var(--lane-index, 0) * -2.7s);will-change:transform}
+.world-front .pixel-person{animation-name:cross-left;animation-duration:20s;animation-delay:calc(var(--lane-index, 0) * -2.1s)}
+.world-back .pixel-person:nth-child(1){--lane-index:0}.world-back .pixel-person:nth-child(2){--lane-index:1}.world-back .pixel-person:nth-child(3){--lane-index:2}.world-back .pixel-person:nth-child(4){--lane-index:3}.world-back .pixel-person:nth-child(5){--lane-index:4}.world-back .pixel-person:nth-child(6){--lane-index:5}.world-back .pixel-person:nth-child(7){--lane-index:6}.world-back .pixel-person:nth-child(8){--lane-index:7}.world-back .pixel-person:nth-child(9){--lane-index:8}
+.world-front .pixel-person:nth-child(1){--lane-index:0}.world-front .pixel-person:nth-child(2){--lane-index:1}.world-front .pixel-person:nth-child(3){--lane-index:2}.world-front .pixel-person:nth-child(4){--lane-index:3}.world-front .pixel-person:nth-child(5){--lane-index:4}.world-front .pixel-person:nth-child(6){--lane-index:5}.world-front .pixel-person:nth-child(7){--lane-index:6}.world-front .pixel-person:nth-child(8){--lane-index:7}.world-front .pixel-person:nth-child(9){--lane-index:8}
+.person-arm{transform-box:view-box;transform-origin:32px 53px}
+.person-arm.arm-left{animation:arm-swing-left .48s steps(2,end) infinite alternate}
+.person-arm.arm-right{animation:arm-swing-right .48s steps(2,end) infinite alternate}
+.world-layers .pixel-person:nth-child(3n) .person-arm{animation-duration:.58s}
+.world-layers .pixel-person:nth-child(3n) .person-pack{display:none}
+.world-layers .pixel-person:nth-child(2n) .person-body{filter:saturate(.82)}
+@keyframes cross-right{from{transform:translateX(-100px)}to{transform:translateX(calc(100vw + 120px))}}
+@keyframes cross-left{from{transform:translateX(calc(100vw + 120px))}to{transform:translateX(-100px)}}
+@keyframes arm-swing-left{from{transform:rotate(13deg)}to{transform:rotate(-13deg)}}
+@keyframes arm-swing-right{from{transform:rotate(-13deg)}to{transform:rotate(13deg)}}
+.wave-player{pointer-events:none}
+@media(max-width:700px){.world-layers .pixel-person{width:42px}.world-player{width:78px;height:70%}.player-portrait-wrap{width:78px;height:128px}.world-front .pixel-person:nth-child(2n){display:flex}}
+@media(prefers-reduced-motion:reduce){.world-layers .pixel-person,.person-arm{animation:none!important}}

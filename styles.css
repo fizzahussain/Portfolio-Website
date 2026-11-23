@@ -175,3 +175,36 @@ main{padding-top:68px}.level{position:relative;min-height:100vh;padding:110px ma
 .person-arm.arm-right{transform-origin:52px 52px}
 @media(prefers-reduced-motion:reduce){.player-portrait-wrap.is-waving .player-wave-arm,.world-back .pixel-person .arm-right{animation:none!important}}
 @keyframes passer-wave{from{transform:rotate(0)}to{transform:rotate(-65deg)}}
+
+
+/* Natural illustrated crowd outro. No postcard, HUD, platform or scene backdrop. */
+.level-footer{background:#090909!important;color:#f6f3ef;padding:74px clamp(14px,3vw,44px) 34px;overflow:hidden}
+.level-footer .footer-heading{max-width:1440px;margin:0 auto 18px}
+.level-footer .level-tag{display:none}
+.level-footer h2{font-size:clamp(42px,6vw,78px);letter-spacing:-.055em;margin:0 0 8px;color:#f6f3ef}
+.level-footer h2 em{color:#c9c5c1}
+.level-footer .footer-heading p{max-width:520px;color:#aaa6a2;font-size:15px}
+.illustrated-world{position:relative;max-width:1600px;width:100%;height:clamp(340px,42vw,560px);margin:0 auto;overflow:hidden;background:transparent;isolation:isolate}
+.illustrated-crowd{position:absolute;inset:0;pointer-events:none}
+.illustrated-crowd.back-lane{z-index:1;opacity:.82}
+.illustrated-crowd.front-lane{z-index:3}
+.crowd-walker{position:absolute;left:var(--x);bottom:var(--base);height:var(--h);width:clamp(58px,7.3vw,112px);min-width:58px;transform-origin:center bottom;animation:cross-people 29s linear infinite;animation-delay:var(--delay);will-change:transform}
+.back-lane .crowd-walker{height:calc(var(--h)*.82);filter:grayscale(1);opacity:.72;animation-duration:36s}
+.front-lane .crowd-walker{animation-direction:reverse}
+.crowd-walker svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 2px 1px rgba(0,0,0,.14))}
+.crowd-walker .walk-figure{transform-origin:34px 184px;animation:body-bob .62s ease-in-out infinite alternate}
+.crowd-walker .legs{transform-origin:34px 124px;animation:leg-stride .48s ease-in-out infinite alternate}
+.crowd-walker .arms{transform-origin:34px 75px;animation:arm-stride .48s ease-in-out infinite alternate}
+.crowd-walker:nth-child(3n) .walk-figure{animation-duration:.78s}
+.crowd-walker:nth-child(4n) .legs{animation-duration:.68s}
+.crowd-walker:nth-child(5n) .arms{animation-duration:.7s}
+.home-player{position:absolute;z-index:5;left:50%;bottom:0;transform:translateX(-50%);height:76%;width:clamp(100px,13vw,170px);display:flex;align-items:flex-end;justify-content:center;pointer-events:none}
+.home-player .player-portrait{display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom;filter:none;image-rendering:auto;background:transparent;border:0;border-radius:0;box-shadow:none;outline:0}
+.player-portrait-wrap,.player-glow,.player-wave-arm,.player-nameplate,.player-speech{display:none!important}
+.footer-bottom,.footer-sign-card,.footer-flip{display:none!important}
+@keyframes cross-people{from{translate:-160px 0}to{translate:calc(100vw + 180px) 0}}
+@keyframes body-bob{from{translate:0 0}to{translate:0 -2px}}
+@keyframes leg-stride{from{transform:rotate(-8deg)}to{transform:rotate(8deg)}}
+@keyframes arm-stride{from{transform:rotate(10deg)}to{transform:rotate(-10deg)}}
+@media(max-width:700px){.illustrated-world{height:350px}.crowd-walker{width:58px}.home-player{height:72%;width:112px}.level-footer{padding-top:55px}}
+@media(prefers-reduced-motion:reduce){.crowd-walker,.crowd-walker *{animation:none!important}}

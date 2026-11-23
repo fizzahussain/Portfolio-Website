@@ -1,7 +1,7 @@
 const $=(s,p=document)=>p.querySelector(s);const $$=(s,p=document)=>[...p.querySelectorAll(s)];
 const site=$('#site'),title=$('#titleScreen');let avatarMode='glasses',sound=false,lastY=window.scrollY,walkTimer;
 const avatarSrc={glasses:'media/ui/fizza-glasses.jpg',casual:'media/ui/fizza-no-glasses.jpg'};
-$$('.player-card').forEach(card=>card.addEventListener('click',()=>{$$('.player-card').forEach(c=>{c.classList.remove('active');c.setAttribute('aria-pressed','false')});card.classList.add('active');card.setAttribute('aria-pressed','true');avatarMode=card.dataset.avatar;const footerAvatar=document.querySelector('.player-portrait');if(footerAvatar)footerAvatar.src=avatarSrc[avatarMode];tone(660,.04)}));
+$$('.player-card').forEach(card=>card.addEventListener('click',()=>{$$('.player-card').forEach(c=>{c.classList.remove('active');c.setAttribute('aria-pressed','false')});card.classList.add('active');card.setAttribute('aria-pressed','true');avatarMode=card.dataset.avatar;const footerAvatar=document.querySelector('.home-player .player-portrait');if(footerAvatar)footerAvatar.src=avatarSrc[avatarMode];tone(660,.04)}));
 function enter(mode='story'){title.style.display='none';site.classList.remove('locked');document.body.dataset.mode=mode;$('#guideAvatar').src=avatarSrc[avatarMode];setTimeout(()=>$('#about').scrollIntoView({behavior:'smooth'}),120);achievement(mode==='quick'?'QUICK EXPLORE READY':'STORY MODE STARTED')}
 $('#newGame').onclick=()=>enter('story');$('#quickExplore').onclick=()=>{enter('quick');setTimeout(openMap,240)};
 function tone(freq=520,dur=.05){if(!sound)return;const A=window.AudioContext||window.webkitAudioContext;const a=new A(),o=a.createOscillator(),g=a.createGain();o.type='square';o.frequency.value=freq;g.gain.value=.025;o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+dur)}
@@ -82,17 +82,6 @@ window.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!$('#demoOverlay')
 
 
 // Footer scene, project folders, and the contact companion.
-const flipButton = $('#footerFlip');
-if (flipButton) flipButton.addEventListener('click', () => {
-  const card = $('#footerSignCard');
-  const flipped = card.classList.toggle('flipped');
-  card.innerHTML = flipped
-    ? '<span>BACK OF THE POSTCARD</span><b>See you in the next build.<br>Until then, stay curious.</b><small>END OF LEVEL · NOT THE END</small>'
-    : '<span>POSTCARD FROM FIZZA</span><b>Stay curious.<br>Make something kind.</b><small>ISLAMABAD · EARTH · INTERNET</small>';
-  flipButton.setAttribute('aria-pressed', String(flipped));
-  flipButton.textContent = flipped ? '↻ FLIP IT BACK' : '↻ FLIP THE SIGN';
-  tone(flipped ? 720 : 520, .05);
-});
 const chatToggle = $('#chatToggle');
 const chatPanel = $('#chatPanel');
 function toggleChat(open) {
@@ -138,18 +127,7 @@ window.addEventListener('keydown', event => {
 const footerPlayerPortrait = $('.player-portrait');
 if (footerPlayerPortrait) footerPlayerPortrait.src = avatarSrc[avatarMode];
 
-/* Correct footer wave interaction: raise a separate arm, not the whole player. */
-const wavePlayerButton = $('#wavePlayer');
-if (wavePlayerButton) wavePlayerButton.addEventListener('click', () => {
-  const portrait = $('.player-portrait-wrap');
-  if (!portrait) return;
-  portrait.classList.remove('is-waving');
-  void portrait.offsetWidth;
-  portrait.classList.add('is-waving');
-  wavePlayerButton.textContent = '♡ HI THERE!';
-  tone(760,.07);
-  window.setTimeout(() => {
-    portrait.classList.remove('is-waving');
-    wavePlayerButton.textContent = '✦ WAVE BACK';
-  }, 1700);
-});
+
+/* The footer uses the same selected character as the opening screen. */
+const footerPlayer = $('.home-player .player-portrait');
+if (footerPlayer) footerPlayer.src = avatarSrc[avatarMode];

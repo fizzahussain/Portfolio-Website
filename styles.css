@@ -208,3 +208,14 @@ main{padding-top:68px}.level{position:relative;min-height:100vh;padding:110px ma
 @keyframes arm-stride{from{transform:rotate(10deg)}to{transform:rotate(-10deg)}}
 @media(max-width:700px){.illustrated-world{height:350px}.crowd-walker{width:58px}.home-player{height:72%;width:112px}.level-footer{padding-top:55px}}
 @media(prefers-reduced-motion:reduce){.crowd-walker,.crowd-walker *{animation:none!important}}
+
+/* Stagger crowd depth and scale so the silhouettes feel like a real passing street crowd. */
+.illustrated-crowd.back-lane .crowd-walker{filter:grayscale(1);opacity:.56}
+.illustrated-crowd.front-lane .crowd-walker{filter:grayscale(1);opacity:1}
+.illustrated-crowd.back-lane .crowd-walker:nth-child(3n){z-index:2}
+.illustrated-crowd.back-lane .crowd-walker:nth-child(3n+1){z-index:1}
+.illustrated-crowd.front-lane .crowd-walker:nth-child(2n){z-index:3}
+.illustrated-crowd.front-lane .crowd-walker:nth-child(3n){z-index:4}
+.crowd-walker .walk-figure{transform-origin:34px 184px}
+.home-player{height:62%;width:clamp(100px,12vw,156px)}
+.home-player .player-portrait{background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;outline:0!important;padding:0!important}

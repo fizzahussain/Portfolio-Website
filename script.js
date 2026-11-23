@@ -124,7 +124,7 @@ window.addEventListener('keydown', event => {
 
 
 /* Footer player always matches the home-screen avatar selection. */
-const footerPlayerPortrait = $('.player-portrait');
+const footerPlayerPortrait = $('.home-player .player-portrait');
 if (footerPlayerPortrait) footerPlayerPortrait.src = avatarSrc[avatarMode];
 
 

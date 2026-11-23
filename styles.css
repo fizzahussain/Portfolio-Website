@@ -124,3 +124,11 @@ main{padding-top:68px}.level{position:relative;min-height:100vh;padding:110px ma
 @keyframes player-wave{0%,100%{transform:rotate(0)}50%{transform:rotate(-38deg)}}
 @media(max-width:700px){.level-footer{padding-top:68px}.game-world{height:300px}.world-hud{max-width:65%;gap:5px}.world-hud span{font-size:6px;padding:5px}.world-back{opacity:.55}.world-front .pixel-person:nth-child(2n){display:none}.world-player{height:70%;width:72px}.player-nameplate{font-size:6px}.player-speech{font-size:14px;right:calc(100% + 5px)}.wave-player{font-size:7px;right:8px;top:8px}}
 @media(prefers-reduced-motion:reduce){.pixel-person,.person-legs,.person-arms{animation:none!important}.world-player.is-waving .person-arms{animation:none!important}}
+
+/* Subtle movement across the game-world lanes */
+.world-back{animation:world-walk-left 22s ease-in-out infinite alternate}
+.world-front{animation:world-walk-right 18s ease-in-out infinite alternate}
+.player-character .player-details{transform-origin:32px 32px}
+@keyframes world-walk-left{from{translate:2% 0}to{translate:-7% 0}}
+@keyframes world-walk-right{from{translate:-3% 0}to{translate:5% 0}}
+@media(prefers-reduced-motion:reduce){.world-back,.world-front{animation:none!important}}

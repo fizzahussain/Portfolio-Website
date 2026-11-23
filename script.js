@@ -132,3 +132,16 @@ if ($('#chatForm')) $('#chatForm').addEventListener('submit', event => {
 window.addEventListener('keydown', event => {
   if (event.key === 'Escape' && chatPanel && !chatPanel.classList.contains('hidden')) toggleChat(false);
 });
+
+/* Pixel-world footer interactions */
+const wavePlayer = $('#wavePlayer');
+if (wavePlayer) wavePlayer.addEventListener('click', () => {
+  const player = $('.world-player');
+  if (!player) return;
+  player.classList.remove('is-waving');
+  void player.offsetWidth;
+  player.classList.add('is-waving');
+  wavePlayer.textContent = '♡ WAVE SENT!';
+  tone(780,.08);
+  window.setTimeout(() => { wavePlayer.textContent = '✦ WAVE BACK'; player.classList.remove('is-waving'); }, 1500);
+});

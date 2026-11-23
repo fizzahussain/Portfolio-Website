@@ -137,3 +137,19 @@ window.addEventListener('keydown', event => {
 /* Footer player always matches the home-screen avatar selection. */
 const footerPlayerPortrait = $('.player-portrait');
 if (footerPlayerPortrait) footerPlayerPortrait.src = avatarSrc[avatarMode];
+
+/* Correct footer wave interaction: raise a separate arm, not the whole player. */
+const wavePlayerButton = $('#wavePlayer');
+if (wavePlayerButton) wavePlayerButton.addEventListener('click', () => {
+  const portrait = $('.player-portrait-wrap');
+  if (!portrait) return;
+  portrait.classList.remove('is-waving');
+  void portrait.offsetWidth;
+  portrait.classList.add('is-waving');
+  wavePlayerButton.textContent = '♡ HI THERE!';
+  tone(760,.07);
+  window.setTimeout(() => {
+    portrait.classList.remove('is-waving');
+    wavePlayerButton.textContent = '✦ WAVE BACK';
+  }, 1700);
+});
